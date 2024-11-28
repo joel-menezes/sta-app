@@ -1,27 +1,19 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:staapp/theme/styles.dart';
+
 
 class SpiritMeter extends StatelessWidget {
   const SpiritMeter({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    
+    double widths = MediaQuery.sizeOf(context).width - 16;
     return Column(children: [
       Container(
-          margin: const EdgeInsets.only(top: 20.0),
-          width: 350.0,
+          margin: const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0),
+          width: widths,
           height: null,
-          decoration: BoxDecoration(
-            boxShadow: const [
-              BoxShadow(
-                  color: Colors.black54,
-                  blurRadius: 10,
-                  offset: Offset(0, 0),
-                  spreadRadius: 0.1,
-                  blurStyle: BlurStyle.normal)
-            ],
-            borderRadius: BorderRadius.circular(20),
-          ),
+        decoration: BoxDecoration(boxShadow: Styles.normalBoxShadow, borderRadius: Styles.primaryBorderRadius),
           child: Card(
               color: Colors.white,
               child: Padding(

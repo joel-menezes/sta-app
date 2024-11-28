@@ -19,8 +19,8 @@ class Styles{
     const BoxShadow(
       color: Color.fromRGBO(3, 0, 0, 0.3),
       spreadRadius: 0,
-      blurRadius: 10,
-      offset: Offset(0, 20),
+      blurRadius: 5,
+      offset: Offset.zero,
     )
   ];
 

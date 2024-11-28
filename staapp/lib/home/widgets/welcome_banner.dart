@@ -7,11 +7,12 @@ class WelcomeBanner extends StatelessWidget {
   const WelcomeBanner({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    double widths = MediaQuery.sizeOf(context).width - 24;
     return Column( children: [
 
         Container(
-                  margin: const EdgeInsets.only(top: 15.0),
-                  width: 350.0,
+                  margin: const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0),
+                  width: widths,
                   height: null,
                   decoration: BoxDecoration(
                     color: Styles.primary,
@@ -30,8 +31,7 @@ class WelcomeBanner extends StatelessWidget {
                                   SizedBox(
                                     width: 190,
                                   child: Wrap(
-                                    // mainAxisAlignment: MainAxisAlignment.start,
-                                    // crossAxisAlignment: CrossAxisAlignment.start,
+                                   
                                     children: [
 
                                      Text(

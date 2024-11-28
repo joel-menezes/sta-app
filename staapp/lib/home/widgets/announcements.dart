@@ -8,10 +8,11 @@ class Announcements extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
       final theme = Theme.of(context);
+      double widths = MediaQuery.sizeOf(context).width - 16;
     return Column(children: [
       Container(
-        margin: const EdgeInsets.only(top: 20.0),
-        width: 350.0,
+        margin: const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0),
+        width: widths,
         height: null,
         decoration: BoxDecoration(boxShadow: Styles.normalBoxShadow, borderRadius: Styles.primaryBorderRadius),
         child: Card(
