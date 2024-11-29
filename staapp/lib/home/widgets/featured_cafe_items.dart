@@ -8,6 +8,7 @@ class CafeItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double widths = MediaQuery.sizeOf(context).width - 16;
+    double heights = MediaQuery.sizeOf(context).height;
 
     return Column(children: [
       Container(
@@ -26,7 +27,7 @@ class CafeItems extends StatelessWidget {
                     children: [
                       Text('Featured Cafe Items',
                           style: new TextStyle(
-                            fontSize: 20,
+                            fontSize: 15,
                             color: Color(0xFF8D1230),
                             fontWeight: FontWeight.bold,
                           )),
@@ -59,9 +60,9 @@ class CafeItems extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                            margin: const EdgeInsets.only(top: 10.0),
-                            width: 100.0,
-                            height: 200,
+                            margin: const EdgeInsets.all(3.0),
+                            width: 90/350 * widths,
+                            height: 150/600 * heights,
                             decoration: BoxDecoration(
                               border: Border.all(
                                   color: Color(0xFF8D1230), width: 1),
@@ -80,7 +81,7 @@ class CafeItems extends StatelessWidget {
                                         Text('Fries',
                                         textAlign: TextAlign.center,
                                             style: new TextStyle(
-                                              fontSize: 15,
+                                              fontSize: 10,
                                               color: Color(0xFF8D1230),
                                               fontWeight: FontWeight.bold,
                                               
@@ -89,9 +90,9 @@ class CafeItems extends StatelessWidget {
                                       ])),
                             )),
                         Container(
-                            margin: const EdgeInsets.only(top: 10.0),
-                            width: 100.0,
-                            height: 200,
+                            margin: const EdgeInsets.all(3.0),
+                            width:  90/350 * widths,
+                            height: 150/600 * heights,
                             decoration: BoxDecoration(
                               border: Border.all(
                                   color: Color(0xFF8D1230), width: 1),
@@ -110,7 +111,7 @@ class CafeItems extends StatelessWidget {
                                         Text('Chicken Burger',
                                         textAlign: TextAlign.center,
                                             style: new TextStyle(
-                                              fontSize: 15,
+                                              fontSize: 10,
                                               color: Color(0xFF8D1230),
                                               fontWeight: FontWeight.bold,
                                             )),
@@ -118,9 +119,9 @@ class CafeItems extends StatelessWidget {
                                       ])),
                             )),
                         Container(
-                            margin: const EdgeInsets.only(top: 10.0),
-                            width: 100.0,
-                            height: 200,
+                            margin: const EdgeInsets.all(3.0),
+                            width: 90/350 * widths,
+                            height: 150/600 * heights,
                             decoration: BoxDecoration(
                               border: Border.all(
                                   color: Color(0xFF8D1230), width: 1),
@@ -139,7 +140,7 @@ class CafeItems extends StatelessWidget {
                                         Text('Burger With Fries',
                                         textAlign: TextAlign.center,
                                             style: new TextStyle(
-                                              fontSize: 15,
+                                              fontSize: 10,
                                               color: Color(0xFF8D1230),
                                               fontWeight: FontWeight.bold,
                                             )),

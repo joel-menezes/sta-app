@@ -24,7 +24,7 @@ class SpiritMeter extends StatelessWidget {
                       children: [
                         Text('Spirit Meter',
                             style: new TextStyle(
-                              fontSize: 20,
+                              fontSize: 15,
                               color: Color(0xFF8D1230),
                               fontWeight: FontWeight.bold,
                             )),
@@ -35,7 +35,7 @@ class SpiritMeter extends StatelessWidget {
                               padding: EdgeInsets.only(top: 8.0),
                               child: Text('9',
                                   style: new TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 10,
                                     color: Color(0xFF8D1230),
                                     fontWeight: FontWeight.bold,
                                   )),
@@ -61,7 +61,7 @@ class SpiritMeter extends StatelessWidget {
                               padding: EdgeInsets.only(top: 8.0),
                               child: Text('10',
                                   style: new TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 10,
                                     color: Color(0xFF8D1230),
                                     fontWeight: FontWeight.bold,
                                   )),
@@ -87,7 +87,7 @@ class SpiritMeter extends StatelessWidget {
                               padding: EdgeInsets.only(top: 8.0),
                               child: Text('11',
                                   style: new TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 10,
                                     color: Color(0xFF8D1230),
                                     fontWeight: FontWeight.bold,
                                   )),
@@ -113,7 +113,7 @@ class SpiritMeter extends StatelessWidget {
                               padding: EdgeInsets.only(top: 8.0),
                               child: Text('12',
                                   style: new TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 10,
                                     color: Color(0xFF8D1230),
                                     fontWeight: FontWeight.bold,
                                   )),

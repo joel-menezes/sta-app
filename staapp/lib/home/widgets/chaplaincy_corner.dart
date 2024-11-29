@@ -29,7 +29,7 @@ class ChaplaincyCorner extends StatelessWidget {
                     children: [
                       Text('Chaplaincy Corner',
                           style: new TextStyle(
-                            fontSize: 20,
+                            fontSize: 15,
                             color: Color(0xFF8D1230),
                             fontWeight: FontWeight.bold,
                           )),

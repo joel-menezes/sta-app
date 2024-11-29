@@ -7,16 +7,16 @@ ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   textTheme: const TextTheme(
     displayLarge: TextStyle(
-    fontSize: 20,
+    fontSize: 15,
     color: Color(0xFF8D1230),
     fontWeight: FontWeight.bold,
     ),
     bodyLarge: TextStyle(
-      fontSize: 15,
+      fontSize: 10,
       color: Colors.white,
     ),
     bodyMedium: TextStyle(
-      fontSize: 15,
+      fontSize: 10,
       color: Color(0xFF8D1230),
     )
   ),

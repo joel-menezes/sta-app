@@ -16,9 +16,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp(    
       title: 'St. Augustine CHS App',
       theme: lightTheme,
+      debugShowCheckedModeBanner: false,
       home: const MyHomePage(title: 'St. Augustine CHS App'),
     );
   }
@@ -50,8 +51,6 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
 
       body: Center(
-          // child: SingleChildScrollView(
-
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
       children:[
