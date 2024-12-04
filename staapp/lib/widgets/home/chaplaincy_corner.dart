@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:staapp/home/widgets/info_box.dart';
+import 'package:staapp/widgets/home/info_box.dart';
 import 'package:staapp/theme/styles.dart';
 
-class Header extends StatelessWidget {
-  const Header({Key? key}) : super(key: key);
+class ChaplaincyCorner extends StatelessWidget {
+  const ChaplaincyCorner({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double widths = MediaQuery.sizeOf(context).width < 650
@@ -20,7 +20,7 @@ class Header extends StatelessWidget {
               boxShadow: Styles.normalBoxShadow,
               borderRadius: Styles.primaryBorderRadius),
           child: Card(
-            color: Styles.primary,
+            color: Colors.white,
             child: Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Column(
@@ -28,12 +28,16 @@ class Header extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('Cafeteria Menu',
+                      Text('Chaplaincy Corner',
                           style: new TextStyle(
                             fontSize: 15,
-                            color: Colors.white,
+                            color: Color(0xFF8D1230),
                             fontWeight: FontWeight.bold,
                           )),
+                      InfoBox(
+                          name: "Verse of The Day",
+                          message:
+                              'We may throw the dice, but the LORD determines how they fall. (Proverbs 16:33)'),
                     ])),
           ))
     ]);

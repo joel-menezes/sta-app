@@ -1,13 +1,12 @@
-import 'package:staapp/home/widgets/info_box.dart';
 import 'package:flutter/material.dart';
-import 'package:staapp/theme/styles.dart';
 import 'dart:io';
+import 'package:staapp/widgets/home/info_box.dart';
+import 'package:staapp/theme/styles.dart';
 
-class Specials extends StatelessWidget {
-  const Specials({Key? key}) : super(key: key);
+class Header extends StatelessWidget {
+  const Header({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     double widths = MediaQuery.sizeOf(context).width < 650
         ? MediaQuery.sizeOf(context).width - 16
         : (MediaQuery.sizeOf(context).width - 72) / 2;
@@ -21,7 +20,7 @@ class Specials extends StatelessWidget {
               boxShadow: Styles.normalBoxShadow,
               borderRadius: Styles.primaryBorderRadius),
           child: Card(
-            color: Colors.white,
+            color: Styles.primary,
             child: Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Column(
@@ -29,11 +28,14 @@ class Specials extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('Today\'s Specials',
-                          style: theme.textTheme.displayLarge
-                              ?.copyWith(color: Styles.primary)),
+                      Text('Cafeteria Menu',
+                          style: new TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          )),
                     ])),
-          )),
+          ))
     ]);
   }
 }

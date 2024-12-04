@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:staapp/home/widgets/welcome_banner.dart';
-import 'package:staapp/home/widgets/announcements.dart';
-import 'package:staapp/home/widgets/featured_cafe_items.dart';
-import 'package:staapp/home/widgets/spirit_meter.dart';
-import 'package:staapp/home/widgets/chaplaincy_corner.dart';
+import 'package:staapp/widgets/home/welcome_banner.dart';
+import 'package:staapp/widgets/home/announcements.dart';
+import 'package:staapp/widgets/home/featured_cafe_items.dart';
+import 'package:staapp/widgets/home/spirit_meter.dart';
+import 'package:staapp/widgets/home/chaplaincy_corner.dart';
 import 'package:staapp/theme/theme.dart';
 import 'dart:io';
 

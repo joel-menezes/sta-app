@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:staapp/home/widgets/info_box.dart';
+import 'package:staapp/widgets/home/info_box.dart';
 
 class Styles {
   static const Color primary = Color(0xff8D1230);
