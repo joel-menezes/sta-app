@@ -4,7 +4,6 @@ import 'package:staapp/theme/styles.dart';
 import 'package:staapp/screens/menu_page.dart';
 import 'package:staapp/widgets/home/food_tile.dart';
 
-
 class CafeItems extends StatelessWidget {
   const CafeItems({Key? key}) : super(key: key);
   @override
@@ -49,10 +48,10 @@ class CafeItems extends StatelessWidget {
                                 ),
                                 child: Padding(
                                     padding: EdgeInsets.only(
-                                        top: 5.0,
-                                        left: 5.0,
-                                        right: 5.0,
-                                        bottom: 5.0),
+                                        top: 1.0,
+                                        left: 1.0,
+                                        right: 1.0,
+                                        bottom: 1.0),
                                     child: TextButton(
                                         onPressed: () {
                                           Navigator.pushReplacement(
@@ -75,16 +74,15 @@ class CafeItems extends StatelessWidget {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        for (int i = 0; i < food.length; i ++)
-                          FoodTile(name: food[i], heights: heights, widths: widths),
-                        
+                        for (int i = 0; i < food.length; i++)
+                          FoodTile(
+                              name: food[i], heights: heights, widths: widths),
                       ])
                 ])),
           )),
     ]);
   }
 }
-
 
 // Container(
 //                             margin: const EdgeInsets.all(3.0),

@@ -27,7 +27,8 @@ class _HomePageState extends State<HomePage> {
     double widths = MediaQuery.sizeOf(context).width;
     return Scaffold(
       body: LayoutBuilder(builder: (context, constraints) {
-        if (constraints.maxWidth < 650) { // Phone Size
+        if (constraints.maxWidth < 650) {
+          // Phone Size
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -52,7 +53,8 @@ class _HomePageState extends State<HomePage> {
               ))
             ],
           );
-        } else { // Bigger than Phone
+        } else {
+          // Bigger than Phone
           return Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
