@@ -5,6 +5,7 @@ import 'package:staapp/widgets/home/featured_cafe_items.dart';
 import 'package:staapp/widgets/home/spirit_meter.dart';
 import 'package:staapp/widgets/home/chaplaincy_corner.dart';
 import 'package:staapp/theme/theme.dart';
+import 'package:staapp/theme/styles.dart';
 import 'dart:io';
 
 class HomePage extends StatefulWidget {
@@ -25,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     double widths = MediaQuery.sizeOf(context).width;
+    final theme = Theme.of(context);
     return Scaffold(
       body: LayoutBuilder(builder: (context, constraints) {
         if (constraints.maxWidth < 650) {

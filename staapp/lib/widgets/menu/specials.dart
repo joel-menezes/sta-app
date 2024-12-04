@@ -1,6 +1,7 @@
 import 'package:staapp/widgets/home/info_box.dart';
 import 'package:flutter/material.dart';
 import 'package:staapp/theme/styles.dart';
+import 'package:staapp/theme/theme.dart';
 import 'dart:io';
 
 class Specials extends StatelessWidget {

@@ -1,6 +1,7 @@
 import 'package:staapp/widgets/home/info_box.dart';
 import 'package:flutter/material.dart';
 import 'package:staapp/theme/styles.dart';
+import 'package:staapp/theme/theme.dart';
 import 'dart:io';
 
 class Menu extends StatelessWidget {
@@ -11,7 +12,6 @@ class Menu extends StatelessWidget {
     double widths = MediaQuery.sizeOf(context).width < 650
         ? MediaQuery.sizeOf(context).width - 16
         : (MediaQuery.sizeOf(context).width - 72) / 2;
-
     return Column(children: [
       Container(
           margin: const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0),

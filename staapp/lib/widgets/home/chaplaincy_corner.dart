@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:staapp/widgets/home/info_box.dart';
 import 'package:staapp/theme/styles.dart';
+import 'package:staapp/theme/theme.dart';
+import 'dart:io';
 
 class ChaplaincyCorner extends StatelessWidget {
   const ChaplaincyCorner({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class ChaplaincyCorner extends StatelessWidget {
     double widths = MediaQuery.sizeOf(context).width < 650
         ? MediaQuery.sizeOf(context).width - 16
         : (MediaQuery.sizeOf(context).width - 72) / 2;
+    final theme = Theme.of(context);
 
     return Column(children: [
       Container(
@@ -29,11 +31,8 @@ class ChaplaincyCorner extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text('Chaplaincy Corner',
-                          style: new TextStyle(
-                            fontSize: 15,
-                            color: Color(0xFF8D1230),
-                            fontWeight: FontWeight.bold,
-                          )),
+                          style: theme.textTheme.displayLarge
+                              ?.copyWith(color: Styles.primary)),
                       InfoBox(
                           name: "Verse of The Day",
                           message:

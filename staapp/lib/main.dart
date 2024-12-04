@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:staapp/screens/home_page.dart';
 import 'package:staapp/screens/menu_page.dart';
 import 'package:staapp/theme/theme.dart';
+import 'package:staapp/theme/styles.dart';
 import 'dart:io';
 
 void main() {

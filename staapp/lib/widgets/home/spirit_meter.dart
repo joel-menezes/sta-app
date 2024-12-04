@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:staapp/theme/styles.dart';
+import 'package:staapp/theme/theme.dart';
+import 'dart:io';
 
 class SpiritMeter extends StatelessWidget {
   const SpiritMeter({Key? key}) : super(key: key);
@@ -9,6 +10,7 @@ class SpiritMeter extends StatelessWidget {
     double widths = MediaQuery.sizeOf(context).width < 650
         ? MediaQuery.sizeOf(context).width - 16
         : (MediaQuery.sizeOf(context).width - 72) / 2;
+    final theme = Theme.of(context);
     return Column(children: [
       Container(
           margin: const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0),
@@ -26,22 +28,16 @@ class SpiritMeter extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Spirit Meter',
-                            style: new TextStyle(
-                              fontSize: 15,
-                              color: Color(0xFF8D1230),
-                              fontWeight: FontWeight.bold,
-                            )),
+                            style: theme.textTheme.displayLarge
+                              ?.copyWith(color: Styles.primary)),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 8.0),
                               child: Text('9',
-                                  style: new TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xFF8D1230),
-                                    fontWeight: FontWeight.bold,
-                                  )),
+                                  style: theme.textTheme.bodyLarge
+                              ?.copyWith(color: Styles.primary, fontWeight: FontWeight.bold)),
                             ),
                             Container(
                               margin:
@@ -63,11 +59,8 @@ class SpiritMeter extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(top: 8.0),
                               child: Text('10',
-                                  style: new TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xFF8D1230),
-                                    fontWeight: FontWeight.bold,
-                                  )),
+                                  style: theme.textTheme.bodyLarge
+                              ?.copyWith(color: Styles.primary, fontWeight: FontWeight.bold)),
                             ),
                             Container(
                               margin:
@@ -89,11 +82,8 @@ class SpiritMeter extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(top: 8.0),
                               child: Text('11',
-                                  style: new TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xFF8D1230),
-                                    fontWeight: FontWeight.bold,
-                                  )),
+                                  style: theme.textTheme.bodyLarge
+                              ?.copyWith(color: Styles.primary, fontWeight: FontWeight.bold)),
                             ),
                             Container(
                               margin:
@@ -115,11 +105,8 @@ class SpiritMeter extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(top: 8.0),
                               child: Text('12',
-                                  style: new TextStyle(
-                                    fontSize: 10,
-                                    color: Color(0xFF8D1230),
-                                    fontWeight: FontWeight.bold,
-                                  )),
+                                  style: theme.textTheme.bodyLarge
+                              ?.copyWith(color: Styles.primary, fontWeight: FontWeight.bold)),
                             ),
                             Container(
                               margin:

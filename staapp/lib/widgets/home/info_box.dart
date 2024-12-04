@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:staapp/theme/styles.dart';
+import 'package:staapp/theme/theme.dart';
+import 'dart:io';
 
 class InfoBox extends StatelessWidget {
   final String name;

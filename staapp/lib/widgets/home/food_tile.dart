@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
+import 'package:staapp/theme/theme.dart';
 import 'package:staapp/theme/styles.dart';
+import 'dart:io';
 
 class FoodTile extends StatelessWidget {
   final String name;
@@ -35,11 +36,8 @@ class FoodTile extends StatelessWidget {
                   children: [
                     Text(name,
                         textAlign: TextAlign.center,
-                        style: new TextStyle(
-                          fontSize: 10,
-                          color: Color(0xFF8D1230),
-                          fontWeight: FontWeight.bold,
-                        )),
+                        style: theme.textTheme.bodyLarge
+                              ?.copyWith(color: Styles.primary, fontWeight: FontWeight.bold)),
                   ])),
         ));
   }

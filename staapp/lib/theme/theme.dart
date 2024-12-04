@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:staapp/widgets/home/info_box.dart';
+import 'package:staapp/theme/styles.dart';
+import 'dart:io';
+
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   textTheme: const TextTheme(
       displayLarge: TextStyle(
-        fontSize: 15,
-        color: Color(0xFF8D1230),
+        fontSize: 20,
+        // color: Color(0xFF8D1230),
         fontWeight: FontWeight.bold,
       ),
       bodyLarge: TextStyle(
-        fontSize: 10,
+        fontSize: 12.5,
         color: Colors.white,
       ),
       bodyMedium: TextStyle(
         fontSize: 10,
-        color: Color(0xFF8D1230),
+        // color: Color(0xFF8D1230),
       )),
 );
 

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:staapp/theme/styles.dart';
+import 'package:staapp/theme/theme.dart';
 import 'package:staapp/screens/menu_page.dart';
 import 'package:staapp/widgets/home/food_tile.dart';
+import 'dart:io';
 
 class CafeItems extends StatelessWidget {
   const CafeItems({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class CafeItems extends StatelessWidget {
         ? MediaQuery.sizeOf(context).width - 24
         : (MediaQuery.sizeOf(context).width - 72) / 2;
     double heights = MediaQuery.sizeOf(context).height;
+    final theme = Theme.of(context);
     List<String> food = ["Fries", "Chicken Burger", "Burger With Fries"];
     return Column(children: [
       Container(
@@ -30,11 +32,8 @@ class CafeItems extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Featured Cafe Items',
-                          style: new TextStyle(
-                            fontSize: 15,
-                            color: Color(0xFF8D1230),
-                            fontWeight: FontWeight.bold,
-                          )),
+                          style: theme.textTheme.displayLarge
+                              ?.copyWith(color: Styles.primary)),
                       Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -74,7 +73,7 @@ class CafeItems extends StatelessWidget {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        for (int i = 0; i < food.length; i++)
+                        for (int i = 0; i < 3; i++) // Only do 3 food items, for space reasons
                           FoodTile(
                               name: food[i], heights: heights, widths: widths),
                       ])
@@ -83,85 +82,3 @@ class CafeItems extends StatelessWidget {
     ]);
   }
 }
-
-// Container(
-//                             margin: const EdgeInsets.all(3.0),
-//                             width: widths * 0.3 - 12,
-//                             height: 150 / 600 * heights,
-//                             decoration: BoxDecoration(
-//                               border: Border.all(
-//                                   color: Color(0xFF8D1230), width: 1),
-//                               borderRadius: BorderRadius.circular(20),
-//                             ),
-//                             child: Card(
-//                               color: Colors.white,
-//                               child: Padding(
-//                                   padding: EdgeInsets.all(16.0),
-//                                   child: Column(
-//                                       mainAxisAlignment: MainAxisAlignment.end,
-//                                       crossAxisAlignment:
-//                                           CrossAxisAlignment.center,
-//                                       children: [
-//                                         Text('Fries',
-//                                             textAlign: TextAlign.center,
-//                                             style: new TextStyle(
-//                                               fontSize: 10,
-//                                               color: Color(0xFF8D1230),
-//                                               fontWeight: FontWeight.bold,
-//                                             )),
-//                                       ])),
-//                             )),
-//                         Container(
-//                             margin: const EdgeInsets.all(3.0),
-//                             width: widths * 0.3 - 12,
-//                             height: 150 / 600 * heights,
-//                             decoration: BoxDecoration(
-//                               border: Border.all(
-//                                   color: Color(0xFF8D1230), width: 1),
-//                               borderRadius: BorderRadius.circular(20),
-//                             ),
-//                             child: Card(
-//                               color: Colors.white,
-//                               child: Padding(
-//                                   padding: EdgeInsets.all(16.0),
-//                                   child: Column(
-//                                       mainAxisAlignment: MainAxisAlignment.end,
-//                                       crossAxisAlignment:
-//                                           CrossAxisAlignment.center,
-//                                       children: [
-//                                         Text('Chicken Burger',
-//                                             textAlign: TextAlign.center,
-//                                             style: new TextStyle(
-//                                               fontSize: 10,
-//                                               color: Color(0xFF8D1230),
-//                                               fontWeight: FontWeight.bold,
-//                                             )),
-//                                       ])),
-//                             )),
-//                         Container(
-//                             margin: const EdgeInsets.all(3.0),
-//                             width: widths * 0.3 - 12,
-//                             height: 150 / 600 * heights,
-//                             decoration: BoxDecoration(
-//                               border: Border.all(
-//                                   color: Color(0xFF8D1230), width: 1),
-//                               borderRadius: BorderRadius.circular(20),
-//                             ),
-//                             child: Card(
-//                               color: Colors.white,
-//                               child: Padding(
-//                                   padding: EdgeInsets.all(16.0),
-//                                   child: Column(
-//                                       mainAxisAlignment: MainAxisAlignment.end,
-//                                       crossAxisAlignment:
-//                                           CrossAxisAlignment.center,
-//                                       children: [
-//                                         Text('Burger With Fries',
-//                                             textAlign: TextAlign.center,
-//                                             style: new TextStyle(
-//                                               fontSize: 10,
-//                                               color: Color(0xFF8D1230),
-//                                               fontWeight: FontWeight.bold,
-//                                             )),
-//                                       ])),
-//                             )),

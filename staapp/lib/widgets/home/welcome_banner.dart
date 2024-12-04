@@ -1,4 +1,5 @@
 import 'package:staapp/theme/styles.dart';
+import 'package:staapp/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -9,6 +10,7 @@ class WelcomeBanner extends StatelessWidget {
     double widths = MediaQuery.sizeOf(context).width < 650
         ? MediaQuery.sizeOf(context).width - 16
         : (MediaQuery.sizeOf(context).width - 72) / 2;
+    final theme = Theme.of(context);
     return Column(children: [
       Container(
           margin: const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0),
@@ -34,20 +36,15 @@ class WelcomeBanner extends StatelessWidget {
                                 children: [
                                   Text(
                                     'Welcome Joel Menezes!',
-                                    style: new TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style:  theme.textTheme.displayLarge
+                              ?.copyWith(color: Colors.white),
                                     softWrap: true,
                                   ),
                                   Container(height: 10.0),
                                   Text(
                                       'Today is a beautiful day 1, November 12, 2024',
-                                      style: new TextStyle(
-                                        fontSize: 10,
-                                        color: Colors.white,
-                                      ))
+                                      style: theme.textTheme.bodyLarge
+                              ?.copyWith(color: Colors.white))
                                 ],
                               )),
                           const Spacer(),
