@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:staapp/theme/styles.dart';
-
+import 'package:staapp/screens/menu_page.dart';
 
 class CafeItems extends StatelessWidget {
   const CafeItems({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    double widths = MediaQuery.sizeOf(context).width - 16;
+    double widths = MediaQuery.sizeOf(context).width < 650
+        ? MediaQuery.sizeOf(context).width - 24
+        : (MediaQuery.sizeOf(context).width - 72) / 2;
     double heights = MediaQuery.sizeOf(context).height;
 
     return Column(children: [
       Container(
-       margin: const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0),
-
+          margin: const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0),
           width: widths,
           height: null,
-          decoration: BoxDecoration(boxShadow: Styles.normalBoxShadow, borderRadius: Styles.primaryBorderRadius),
+          decoration: BoxDecoration(
+              boxShadow: Styles.normalBoxShadow,
+              borderRadius: Styles.primaryBorderRadius),
           child: Card(
             color: Colors.white,
             child: Padding(
@@ -48,10 +51,21 @@ class CafeItems extends StatelessWidget {
                                         left: 5.0,
                                         right: 5.0,
                                         bottom: 5.0),
-                                    child: Text('View More >',
-                                        style: new TextStyle(
-                                          fontSize: 10,
-                                          color: Colors.white,
+                                    child: TextButton(
+                                        onPressed: () {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const MenuPage()),
+                                          );
+                                        },
+                                        child: Text(
+                                          'View More >',
+                                          style: new TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.white,
+                                          ),
                                         )))),
                           ])
                     ],
@@ -61,12 +75,11 @@ class CafeItems extends StatelessWidget {
                       children: [
                         Container(
                             margin: const EdgeInsets.all(3.0),
-                            width: 90/350 * widths,
-                            height: 150/600 * heights,
+                            width: widths * 0.3 - 12,
+                            height: 150 / 600 * heights,
                             decoration: BoxDecoration(
                               border: Border.all(
                                   color: Color(0xFF8D1230), width: 1),
-
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Card(
@@ -79,24 +92,21 @@ class CafeItems extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text('Fries',
-                                        textAlign: TextAlign.center,
+                                            textAlign: TextAlign.center,
                                             style: new TextStyle(
                                               fontSize: 10,
                                               color: Color(0xFF8D1230),
                                               fontWeight: FontWeight.bold,
-                                              
                                             )),
-                                        
                                       ])),
                             )),
                         Container(
                             margin: const EdgeInsets.all(3.0),
-                            width:  90/350 * widths,
-                            height: 150/600 * heights,
+                            width: widths * 0.3 - 12,
+                            height: 150 / 600 * heights,
                             decoration: BoxDecoration(
                               border: Border.all(
                                   color: Color(0xFF8D1230), width: 1),
-
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Card(
@@ -109,23 +119,21 @@ class CafeItems extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text('Chicken Burger',
-                                        textAlign: TextAlign.center,
+                                            textAlign: TextAlign.center,
                                             style: new TextStyle(
                                               fontSize: 10,
                                               color: Color(0xFF8D1230),
                                               fontWeight: FontWeight.bold,
                                             )),
-                                        
                                       ])),
                             )),
                         Container(
                             margin: const EdgeInsets.all(3.0),
-                            width: 90/350 * widths,
-                            height: 150/600 * heights,
+                            width: widths * 0.3 - 12,
+                            height: 150 / 600 * heights,
                             decoration: BoxDecoration(
                               border: Border.all(
                                   color: Color(0xFF8D1230), width: 1),
-
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Card(
@@ -138,13 +146,12 @@ class CafeItems extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text('Burger With Fries',
-                                        textAlign: TextAlign.center,
+                                            textAlign: TextAlign.center,
                                             style: new TextStyle(
                                               fontSize: 10,
                                               color: Color(0xFF8D1230),
                                               fontWeight: FontWeight.bold,
                                             )),
-                                       
                                       ])),
                             )),
                       ])

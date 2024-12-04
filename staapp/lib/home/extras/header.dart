@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:staapp/home/widgets/info_box.dart';
 import 'package:staapp/theme/styles.dart';
 
-class ChaplaincyCorner extends StatelessWidget {
-  const ChaplaincyCorner({Key? key}) : super(key: key);
+class Header extends StatelessWidget {
+  const Header({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double widths = MediaQuery.sizeOf(context).width < 650
@@ -20,7 +20,7 @@ class ChaplaincyCorner extends StatelessWidget {
               boxShadow: Styles.normalBoxShadow,
               borderRadius: Styles.primaryBorderRadius),
           child: Card(
-            color: Colors.white,
+            color: Styles.primary,
             child: Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Column(
@@ -28,16 +28,12 @@ class ChaplaincyCorner extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('Chaplaincy Corner',
+                      Text('Cafeteria Menu',
                           style: new TextStyle(
                             fontSize: 15,
-                            color: Color(0xFF8D1230),
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                           )),
-                      InfoBox(
-                          name: "Verse of The Day",
-                          message:
-                              'We may throw the dice, but the LORD determines how they fall. (Proverbs 16:33)'),
                     ])),
           ))
     ]);

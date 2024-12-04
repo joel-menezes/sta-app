@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:staapp/theme/styles.dart';
 import 'dart:io';
 
-class Announcements extends StatelessWidget {
-  const Announcements({Key? key}) : super(key: key);
+class Menu extends StatelessWidget {
+  const Menu({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -29,21 +29,9 @@ class Announcements extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('Announcements Board',
+                      Text('Today\'s Menu',
                           style: theme.textTheme.displayLarge
                               ?.copyWith(color: Styles.primary)),
-                      InfoBox(
-                          name: 'Animal Rights Committee',
-                          message:
-                              "Attention all animal rights committee members! There will be a yearbook photo this Thurs. Nov. 14th immediately following am announcements in the main foyer."),
-                      InfoBox(
-                          name: 'Athletic Council',
-                          message:
-                              "Friday night intramurals are back! Volleyball tournament will take place Nov. 29th. Registration begins in the back of the caf on Nov. 18. See AC's posters around the school for more information"),
-                      InfoBox(
-                          name: 'Library',
-                          message:
-                              "Due to the Math Contest and OSSLT preparation sessions on Wednesday Nov 13, the library will be closed before school and during Periods 1 & 2."),
                     ])),
           )),
     ]);
