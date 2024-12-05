@@ -29,7 +29,15 @@ class FoodTile extends StatelessWidget {
         child: Card(
           color: Colors.white,
           child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(0.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                  image: AssetImage('assets/logos/sta_logo.png'),
+                  fit: BoxFit.cover,
+                  )
+                ),
+              
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -39,7 +47,9 @@ class FoodTile extends StatelessWidget {
                         style: theme.textTheme.bodyLarge?.copyWith(
                             color: Styles.primary,
                             fontWeight: FontWeight.bold)),
-                  ])),
+                  ])
+                  ),
+                  ),
         ));
   }
 }
