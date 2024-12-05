@@ -4,9 +4,9 @@ import 'package:staapp/widgets/home/info_box.dart';
 import 'package:staapp/theme/styles.dart';
 import 'package:staapp/theme/theme.dart';
 
-
 class Header extends StatelessWidget {
-  const Header({Key? key}) : super(key: key);
+  final String name;
+  const Header({Key? key, required this.name}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double widths = MediaQuery.sizeOf(context).width < 650
@@ -28,11 +28,10 @@ class Header extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Text('Cafeteria Menu',
                           style: theme.textTheme.displayLarge
-                              ?.copyWith(color: Styles.primary)),
+                              ?.copyWith(color: Colors.white)),
                     ])),
           ))
     ]);

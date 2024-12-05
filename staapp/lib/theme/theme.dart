@@ -3,7 +3,6 @@ import 'package:staapp/widgets/home/info_box.dart';
 import 'package:staapp/theme/styles.dart';
 import 'dart:io';
 
-
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   textTheme: const TextTheme(

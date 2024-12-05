@@ -6,8 +6,6 @@ import 'package:staapp/widgets/menu/menu.dart';
 import 'package:staapp/theme/theme.dart';
 import 'package:staapp/theme/styles.dart';
 
-
-
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
 
@@ -16,11 +14,13 @@ class MenuPage extends StatelessWidget {
     final theme = Theme.of(context);
     return Scaffold(
       body: Center(
+            child: SingleChildScrollView (
           child: Column(children: [
-        Header(),
-        Specials(),
-        Menu(),
-      ])),
+        Header(name: "Cafeteria Menu"),
+        Specials( names: ["Pizza", "Pasta", "Expensive Stuff"]),
+        Menu( names: ["Cookie", "Popcorn", "Soup"]),
+      
+      ]))),
     );
   }
 }

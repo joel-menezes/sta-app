@@ -73,9 +73,11 @@ class CafeItems extends StatelessWidget {
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        for (int i = 0; i < 3; i++) // Only do 3 food items, for space reasons
+                        for (int i = 0;
+                            i < 3;
+                            i++) // Only do 3 food items, for space reasons
                           FoodTile(
-                              name: food[i], heights: heights, widths: widths),
+                              name: food[i], heights: heights, widths: widths * 0.3 - 12),
                       ])
                 ])),
           )),

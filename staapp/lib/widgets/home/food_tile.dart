@@ -20,7 +20,7 @@ class FoodTile extends StatelessWidget {
 
     return Container(
         margin: const EdgeInsets.all(3.0),
-        width: widths * 0.3 - 12,
+        width: widths,
         height: 150 / 600 * heights,
         decoration: BoxDecoration(
           border: Border.all(color: Color(0xFF8D1230), width: 1),
@@ -36,8 +36,9 @@ class FoodTile extends StatelessWidget {
                   children: [
                     Text(name,
                         textAlign: TextAlign.center,
-                        style: theme.textTheme.bodyLarge
-                              ?.copyWith(color: Styles.primary, fontWeight: FontWeight.bold)),
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                            color: Styles.primary,
+                            fontWeight: FontWeight.bold)),
                   ])),
         ));
   }

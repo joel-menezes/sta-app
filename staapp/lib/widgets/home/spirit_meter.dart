@@ -29,15 +29,16 @@ class SpiritMeter extends StatelessWidget {
                       children: [
                         Text('Spirit Meter',
                             style: theme.textTheme.displayLarge
-                              ?.copyWith(color: Styles.primary)),
+                                ?.copyWith(color: Styles.primary)),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: EdgeInsets.only(top: 8.0),
                               child: Text('9',
-                                  style: theme.textTheme.bodyLarge
-                              ?.copyWith(color: Styles.primary, fontWeight: FontWeight.bold)),
+                                  style: theme.textTheme.bodyLarge?.copyWith(
+                                      color: Styles.primary,
+                                      fontWeight: FontWeight.bold)),
                             ),
                             Container(
                               margin:
@@ -59,8 +60,9 @@ class SpiritMeter extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(top: 8.0),
                               child: Text('10',
-                                  style: theme.textTheme.bodyLarge
-                              ?.copyWith(color: Styles.primary, fontWeight: FontWeight.bold)),
+                                  style: theme.textTheme.bodyLarge?.copyWith(
+                                      color: Styles.primary,
+                                      fontWeight: FontWeight.bold)),
                             ),
                             Container(
                               margin:
@@ -82,8 +84,9 @@ class SpiritMeter extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(top: 8.0),
                               child: Text('11',
-                                  style: theme.textTheme.bodyLarge
-                              ?.copyWith(color: Styles.primary, fontWeight: FontWeight.bold)),
+                                  style: theme.textTheme.bodyLarge?.copyWith(
+                                      color: Styles.primary,
+                                      fontWeight: FontWeight.bold)),
                             ),
                             Container(
                               margin:
@@ -105,8 +108,9 @@ class SpiritMeter extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(top: 8.0),
                               child: Text('12',
-                                  style: theme.textTheme.bodyLarge
-                              ?.copyWith(color: Styles.primary, fontWeight: FontWeight.bold)),
+                                  style: theme.textTheme.bodyLarge?.copyWith(
+                                      color: Styles.primary,
+                                      fontWeight: FontWeight.bold)),
                             ),
                             Container(
                               margin:

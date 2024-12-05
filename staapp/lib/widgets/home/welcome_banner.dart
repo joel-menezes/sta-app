@@ -36,15 +36,15 @@ class WelcomeBanner extends StatelessWidget {
                                 children: [
                                   Text(
                                     'Welcome Joel Menezes!',
-                                    style:  theme.textTheme.displayLarge
-                              ?.copyWith(color: Colors.white),
+                                    style: theme.textTheme.displayLarge
+                                        ?.copyWith(color: Colors.white),
                                     softWrap: true,
                                   ),
                                   Container(height: 10.0),
                                   Text(
                                       'Today is a beautiful day 1, November 12, 2024',
                                       style: theme.textTheme.bodyLarge
-                              ?.copyWith(color: Colors.white))
+                                          ?.copyWith(color: Colors.white))
                                 ],
                               )),
                           const Spacer(),
