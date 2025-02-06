@@ -1,18 +1,29 @@
-import 'package:flutter/material.dart';
-import 'dart:io';
 import 'package:staapp/widgets/home/info_box.dart';
+import 'package:flutter/material.dart';
 import 'package:staapp/theme/styles.dart';
 import 'package:staapp/theme/theme.dart';
+import 'package:staapp/widgets/songs/song_tile.dart';
+import 'dart:io';
 
-class Header extends StatelessWidget {
-  final String name;
-  const Header({Key? key, required this.name}) : super(key: key);
+class SongRequests extends StatelessWidget {
+  const SongRequests({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     double widths = MediaQuery.sizeOf(context).width < 650
         ? MediaQuery.sizeOf(context).width - 16
         : (MediaQuery.sizeOf(context).width - 72) / 2;
-    final theme = Theme.of(context);
+    List<String> name = [
+      "One Dance",
+      "Feel No Ways",
+      "Views",
+    ];
+    List<String> message = [
+      "By: Drake",
+      "By: Drake",
+      "By: Drake",
+    ];
+
     return Column(children: [
       Container(
           margin: const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0),
@@ -22,18 +33,20 @@ class Header extends StatelessWidget {
               boxShadow: Styles.normalBoxShadow,
               borderRadius: Styles.primaryBorderRadius),
           child: Card(
-            color: Styles.primary,
+            color: Colors.white,
             child: Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(name,
+                      Text('Song Requests Board',
                           style: theme.textTheme.displayLarge
-                              ?.copyWith(color: Colors.white)),
+                              ?.copyWith(color: Styles.primary)),
+                      for (int i = 0; i < name.length; i++)
+                        SongTile(name: name[i], message: message[i])
                     ])),
-          ))
+          )),
     ]);
   }
 }

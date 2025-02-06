@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:staapp/widgets/home/announcements.dart';
 import 'package:staapp/widgets/extras/header.dart';
 import 'package:staapp/widgets/menu/specials.dart';
+import 'package:staapp/widgets/songs/song_voting.dart';
 import 'package:staapp/widgets/menu/menu.dart';
 import 'package:staapp/theme/theme.dart';
 import 'package:staapp/theme/styles.dart';
 
-class MenuPage extends StatelessWidget {
-  const MenuPage({super.key});
+class SongPage extends StatelessWidget {
+  const SongPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,8 @@ class MenuPage extends StatelessWidget {
       body: Center(
           child: SingleChildScrollView(
               child: Column(children: [
-        Header(name: "Cafeteria Menu"),
-        Specials(names: ["Pizza", "Pasta", "Expensive Stuff"]),
-        Menu(names: ["Cookie", "Popcorn", "Soup"]),
+        Header(name: "Song Requests"),
+        SongRequests(),
       ]))),
     );
   }

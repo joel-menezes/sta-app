@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:staapp/theme/styles.dart';
 import 'package:staapp/theme/theme.dart';
 import 'package:staapp/screens/menu_page.dart';
+import 'package:staapp/screens/song_request.dart';
 import 'package:staapp/widgets/home/food_tile.dart';
 import 'dart:io';
 
@@ -57,7 +58,7 @@ class CafeItems extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const MenuPage()),
+                                                    const SongPage()),
                                           );
                                         },
                                         child: Text(
@@ -77,7 +78,9 @@ class CafeItems extends StatelessWidget {
                             i < 3;
                             i++) // Only do 3 food items, for space reasons
                           FoodTile(
-                              name: food[i], heights: heights, widths: widths * 0.3 - 12),
+                              name: food[i],
+                              heights: heights,
+                              widths: widths * 0.3 - 12),
                       ])
                 ])),
           )),

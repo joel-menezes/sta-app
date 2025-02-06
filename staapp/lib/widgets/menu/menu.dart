@@ -34,21 +34,18 @@ class Menu extends StatelessWidget {
                       Text('Menu',
                           style: theme.textTheme.displayLarge
                               ?.copyWith(color: Styles.primary)),
-                      
-                      Column(
-                        children: [
-                          for (int i = 0; i < names.length; i +=2)
-                        Row(children: 
-                          [
-                          for (int j = 0; j < ((i + j == names.length) ? 1:2); j ++)
-                          
-                            FoodTile(name: names[i + j], heights: heights, widths: widths * 0.5 - 30),
-                         
-                          ]
-                        )
-                        ]
-                      )
-                        
+                      Column(children: [
+                        for (int i = 0; i < names.length; i += 2)
+                          Row(children: [
+                            for (int j = 0;
+                                j < ((i + j == names.length) ? 1 : 2);
+                                j++)
+                              FoodTile(
+                                  name: names[i + j],
+                                  heights: heights,
+                                  widths: widths * 0.5 - 30),
+                          ])
+                      ])
                     ])),
           )),
     ]);
