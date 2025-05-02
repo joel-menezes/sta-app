@@ -7,19 +7,21 @@ class FoodTile extends StatelessWidget {
   final String name;
   final double heights;
   final double widths;
+  final String? price;
 
   const FoodTile(
       {Key? key,
       required this.name,
       required this.heights,
-      required this.widths})
+      required this.widths,
+      this.price})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Container(
-        margin: const EdgeInsets.all(3.0),
+        margin: const EdgeInsets.all(0),
         width: widths,
         height: 150 / 600 * heights,
         decoration: BoxDecoration(
@@ -27,24 +29,33 @@ class FoodTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Card(
+          elevation: 0,
           color: Colors.white,
           child: Padding(
             padding: EdgeInsets.all(0.0),
             child: Container(
+              clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                  image: AssetImage('assets/logos/sta_logo.png'),
+                  image: AssetImage('assets/logos/placeholder.png'),
                   fit: BoxFit.cover,
+                  
                 )),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(name,
-                          textAlign: TextAlign.center,
-                          style: theme.textTheme.bodyLarge?.copyWith(
-                              color: Styles.primary,
-                              fontWeight: FontWeight.bold)),
+                      (price == null || price!.isEmpty)
+                          ? Text(name,
+                              textAlign: TextAlign.center,
+                              style: theme.textTheme.bodyLarge?.copyWith(
+                                  color: Styles.primary,
+                                  fontWeight: FontWeight.bold))
+                          : Text('\$${price}',
+                              textAlign: TextAlign.center,
+                              style: theme.textTheme.bodyLarge?.copyWith(
+                                  color: Styles.primary,
+                                  fontWeight: FontWeight.bold)),
                     ])),
           ),
         ));

@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 class WelcomeBanner extends StatelessWidget {
-  const WelcomeBanner({Key? key}) : super(key: key);
+  final String? name;
+  const WelcomeBanner({Key? key, this.name}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double widths = MediaQuery.sizeOf(context).width < 650
@@ -22,20 +23,27 @@ class WelcomeBanner extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Card(
+            elevation: 0,
               color: Color(0xFF8D1230),
               child: Padding(
-                  padding: EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
+                  padding: EdgeInsets.only(
+                      left: 16.0,
+                      top: 16.0,
+                      bottom: 16.0), // Phone 16, tv settings is 32, 20 ,20
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(children: [
                           SizedBox(
-                              width: 180,
+                              width: MediaQuery.sizeOf(context).width /
+                                  4 , // Changing for TV set at 180 for phone
                               child: Wrap(
                                 children: [
                                   Text(
-                                    'Welcome Joel Menezes!',
+                                    'Welcome ' +
+                                        (name ?? "to St. Augustine") +
+                                        '!',
                                     style: theme.textTheme.displayLarge
                                         ?.copyWith(color: Colors.white),
                                     softWrap: true,

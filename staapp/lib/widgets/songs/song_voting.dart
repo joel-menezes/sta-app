@@ -13,16 +13,8 @@ class SongRequests extends StatelessWidget {
     double widths = MediaQuery.sizeOf(context).width < 650
         ? MediaQuery.sizeOf(context).width - 16
         : (MediaQuery.sizeOf(context).width - 72) / 2;
-    List<String> name = [
-      "One Dance",
-      "Feel No Ways",
-      "Views",
-    ];
-    List<String> message = [
-      "By: Drake",
-      "By: Drake",
-      "By: Drake",
-    ];
+    List<String> name = ["One Dance", "Feel No Ways", "Views", "Hello"];
+    List<String> message = ["By: Drake", "By: Drake", "By: Drake", "By: Adele"];
 
     return Column(children: [
       Container(
@@ -43,6 +35,24 @@ class SongRequests extends StatelessWidget {
                       Text('Song Requests Board',
                           style: theme.textTheme.displayLarge
                               ?.copyWith(color: Styles.primary)),
+                      SizedBox(height: 10),
+                      TextButton(
+                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                              backgroundColor: Styles.secondary,
+                              padding: EdgeInsets.zero,
+                              minimumSize: Size(widths, 40),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(19),
+                              )),
+                          child: Text(
+                            'Add Song',
+                            style: new TextStyle(
+                              fontSize: 15,
+                              color: Colors.white,
+                            ),
+                          )),
+                      SizedBox(height: 10),
                       for (int i = 0; i < name.length; i++)
                         SongTile(name: name[i], message: message[i])
                     ])),

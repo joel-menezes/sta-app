@@ -7,7 +7,8 @@ import 'package:staapp/widgets/home/food_tile.dart';
 import 'dart:io';
 
 class CafeItems extends StatelessWidget {
-  const CafeItems({Key? key}) : super(key: key);
+  final Function(int) changeTab;
+  const CafeItems({Key? key, required this.changeTab}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double widths = MediaQuery.sizeOf(context).width < 650
@@ -32,43 +33,43 @@ class CafeItems extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Featured Cafe Items',
+                      Flexible(
+                        flex: 3,
+                        child: Text(
+                          'Featured Cafe Items',
                           style: theme.textTheme.displayLarge
-                              ?.copyWith(color: Styles.primary)),
-                      Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Container(
-                                height: null,
-                                width: null,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFD8AE1A),
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Padding(
-                                    padding: EdgeInsets.only(
-                                        top: 1.0,
-                                        left: 1.0,
-                                        right: 1.0,
-                                        bottom: 1.0),
-                                    child: TextButton(
-                                        onPressed: () {
-                                          Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const SongPage()),
-                                          );
-                                        },
-                                        child: Text(
-                                          'View More >',
-                                          style: new TextStyle(
-                                            fontSize: 10,
-                                            color: Colors.white,
-                                          ),
-                                        )))),
-                          ])
+                              ?.copyWith(color: Styles.primary),
+                          softWrap: true,
+                        ),
+                      ),
+                      const Spacer(),
+                      Container(
+                          height: null,
+                          width: null,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFD8AE1A),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Padding(
+                              padding: EdgeInsets.only(
+                                  top: 1.0, left: 1.0, right: 1.0, bottom: 1.0),
+                              child: TextButton(
+                                  onPressed: () {
+                                    // Navigator.pushReplacement(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) =>
+                                    //           const SongPage()),
+                                    // );
+                                    changeTab(1);
+                                  },
+                                  child: Text(
+                                    'View More >',
+                                    style: new TextStyle(
+                                      fontSize: 10,
+                                      color: Colors.white,
+                                    ),
+                                  )))),
                     ],
                   ),
                   Row(
@@ -80,7 +81,8 @@ class CafeItems extends StatelessWidget {
                           FoodTile(
                               name: food[i],
                               heights: heights,
-                              widths: widths * 0.3 - 12),
+                              widths: widths * 0.3 - 12,
+                              price: "32.00"),
                       ])
                 ])),
           )),

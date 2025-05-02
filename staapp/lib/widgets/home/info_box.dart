@@ -25,6 +25,7 @@ class InfoBox extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Card(
+            elevation: 0,
             color: Colors.white,
             child: Padding(
                 padding: EdgeInsets.all(16.0),

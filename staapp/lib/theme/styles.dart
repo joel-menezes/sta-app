@@ -7,6 +7,15 @@ class Styles {
   static const Color primary = Color(0xff8D1230);
   static const Color secondary = Color(0xffD8AE1A);
 
+  // Phone Variables
+  static const int phoneWidth = 650;
+  static const double phonePadding = 16.0;
+
+  // TV Variables
+  static const int TVWidth = 1920;
+
+  // Website Variables
+
   static const TextStyle h1 = TextStyle(
     fontSize: 20,
     color: Color(0xFF8D1230),

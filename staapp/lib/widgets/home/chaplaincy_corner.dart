@@ -22,6 +22,7 @@ class ChaplaincyCorner extends StatelessWidget {
               boxShadow: Styles.normalBoxShadow,
               borderRadius: Styles.primaryBorderRadius),
           child: Card(
+            elevation: 0,
             color: Colors.white,
             child: Padding(
                 padding: EdgeInsets.all(16.0),

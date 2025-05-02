@@ -16,25 +16,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    var screenSize = MediaQuery.of(context).size;
+    double width = screenSize.width;
+    double height = screenSize.height;
+
     return MaterialApp(
-        title: 'St. Augustine CHS App',
-        theme: lightTheme,
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/',
-        home: const MainNavigation(),
-        // routes: {
-        //   '/': (context) => const HomePage(),
-        //   '/menu': (context) => const MenuPage(),
-        //   '/songs': (context) => const SongPage(),
-        // }
-        );
-
-
-        
+      title: 'St. Augustine CHS App',
+      theme: (MediaQuery.sizeOf(context).width == 1920
+          ? lightThemeTV
+          : (MediaQuery.sizeOf(context).width < Styles.phoneWidth
+              ? lightThemePhone
+              : lightThemeLaptop)),
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      home: const MainNavigation(),
+    );
   }
 }
-
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -46,29 +44,24 @@ class MainNavigation extends StatefulWidget {
 class _MainNavigationState extends State<MainNavigation> {
   int _selectedIndex = 0; // Tracks the currently selected tab
 
-  // Screens for navigation
-  static const List<Widget> _screens = [
-    HomePage(),
-    MenuPage(),
-    SongPage(),
-  ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
+    final List<Widget> _screens = [
+      HomePage(changeTab: _onItemTapped),
+      MenuPage(),
+      SongPage(),
+    ];
     return Scaffold(
-      body: _screens[_selectedIndex], // Display the selected screen
+      body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex, // Highlight the selected tab
-        onTap: _onItemTapped, // Handle tap on navigation items
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -80,12 +73,16 @@ class _MainNavigationState extends State<MainNavigation> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.music_note),
-            label: 'Music',
+            label: 'Songs',
+          ),
+           BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
         ],
-        selectedItemColor: Styles.primary, // Active icon color
-        unselectedItemColor: Colors.grey, // Inactive icon color
-        backgroundColor: Colors.white, // Background color of the nav bar
+        selectedItemColor: Styles.primary,
+        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.white,
       ),
     );
   }
