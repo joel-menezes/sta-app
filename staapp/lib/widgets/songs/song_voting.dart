@@ -63,7 +63,7 @@ class _SongRequestsState extends State<SongRequests> {
       context: context,
       builder: (BuildContext context) {
         return SizedBox(
-            height: 300,
+            // height: 300,
             child: Center(
                 child:
                     Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
