@@ -25,21 +25,26 @@ class FoodTile extends StatelessWidget {
         width: widths,
         height: 150 / 600 * heights,
         decoration: BoxDecoration(
-          border: Border.all(color: Color(0xFF8D1230), width: 1),
-          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Color(0xFF8D1230), width: 2),
+          borderRadius: BorderRadius.circular(21),
         ),
         child: Card(
           elevation: 0,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
           color: Colors.white,
+          margin: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(
+            // side: BorderSide(color: Color(0xFF8D1230), width: 1),
+            borderRadius: BorderRadius.circular(20),
+          ),
           child: Padding(
             padding: EdgeInsets.all(0.0),
             child: Container(
-              clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                  image: AssetImage('assets/logos/placeholder.png'),
+                  image:
+                      AssetImage('assets/placeholders/unavailable-image.png'),
                   fit: BoxFit.cover,
-                  
                 )),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,

@@ -2,19 +2,140 @@ import 'package:staapp/widgets/home/info_box.dart';
 import 'package:flutter/material.dart';
 import 'package:staapp/theme/styles.dart';
 import 'package:staapp/theme/theme.dart';
+import 'package:staapp/widgets/songs/song.dart';
 import 'package:staapp/widgets/songs/song_tile.dart';
+import 'dart:collection';
 import 'dart:io';
+import 'package:staapp/theme/styles.dart';
+import 'package:staapp/theme/theme.dart';
 
-class SongRequests extends StatelessWidget {
+class SongRequests extends StatefulWidget {
   const SongRequests({Key? key}) : super(key: key);
+
+  @override
+  State<SongRequests> createState() => _SongRequestsState();
+}
+
+class _SongRequestsState extends State<SongRequests> {
+  late List<Song> songs;
+  final TextEditingController songNameController = TextEditingController();
+  final TextEditingController artistNameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    songs = [];
+    songs.sort();
+  }
+
+  @override
+  void dispose() {
+    songNameController.dispose();
+    artistNameController.dispose();
+    super.dispose();
+  }
+
+  void _handleVote(Song song) {
+    setState(() {
+      song.addVote("joel.menezes25@ycdsbk12.ca");
+      songs.sort();
+    });
+  }
+
+  void _addSong(Song newSong) {
+    setState(() {
+      songs.add(newSong);
+      songs.sort();
+    });
+  }
+
+  void showAddSong() {
+    final theme = Theme.of(context);
+
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return SizedBox(
+            height: 300,
+            child: Center(
+                child:
+                    Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+              Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                    icon: Icon(Icons.close, color: Colors.amber),
+                    onPressed: () {
+                      {
+                        Navigator.pop(context);
+                      }
+                    },
+                  )),
+              Text("Add Song",
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                      color: Styles.secondary, fontWeight: FontWeight.bold)),
+              SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextField(
+                  controller: songNameController,
+                  style: TextStyle(color: Styles.secondary),
+                  decoration: InputDecoration(
+                    labelText: 'Song Name',
+                    labelStyle: TextStyle(color: Styles.primary),
+                    hintText: 'Never Gonna Give You Up',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextField(
+                  controller: artistNameController,
+                  style: TextStyle(color: Styles.secondary),
+                  decoration: InputDecoration(
+                    labelText: 'Artist Name',
+                    labelStyle: TextStyle(color: Styles.primary),
+                    hintText: 'Rick Astley',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 15),
+              ElevatedButton(
+                onPressed: () {
+                  final songName = songNameController.text.trim();
+                  final artistName = artistNameController.text.trim();
+                  if (songName.isNotEmpty && artistName.isNotEmpty) {
+                    _addSong(Song(
+                        artistName, songName, ["joel.menezes25@ycdsbk12.ca"]));
+                    Navigator.pop(context);
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.amber,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                ),
+                child: Text('Submit', style: TextStyle(color: Colors.white)),
+              )
+            ])));
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     double widths = MediaQuery.sizeOf(context).width < 650
         ? MediaQuery.sizeOf(context).width - 16
         : (MediaQuery.sizeOf(context).width - 72) / 2;
-    List<String> name = ["One Dance", "Feel No Ways", "Views", "Hello"];
-    List<String> message = ["By: Drake", "By: Drake", "By: Drake", "By: Adele"];
 
     return Column(children: [
       Container(
@@ -37,7 +158,9 @@ class SongRequests extends StatelessWidget {
                               ?.copyWith(color: Styles.primary)),
                       SizedBox(height: 10),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showAddSong(); // _addSong(Song("New Artist", "New Song", []));
+                          },
                           style: TextButton.styleFrom(
                               backgroundColor: Styles.secondary,
                               padding: EdgeInsets.zero,
@@ -53,8 +176,8 @@ class SongRequests extends StatelessWidget {
                             ),
                           )),
                       SizedBox(height: 10),
-                      for (int i = 0; i < name.length; i++)
-                        SongTile(name: name[i], message: message[i])
+                      for (Song song in songs)
+                        SongTile(song: song, onVote: _handleVote)
                     ])),
           )),
     ]);

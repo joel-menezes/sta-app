@@ -12,7 +12,7 @@ ThemeData lightTheme = ThemeData(
         fontWeight: FontWeight.bold,
       ),
       bodyLarge: TextStyle(
-        fontSize: 12.5,
+        fontSize: 15,
         color: Colors.white,
       ),
       bodyMedium: TextStyle(
@@ -25,12 +25,12 @@ ThemeData lightThemePhone = ThemeData(
   brightness: Brightness.light,
   textTheme: const TextTheme(
       displayLarge: TextStyle(
-        fontSize: 25,
+        fontSize: 30,
         // color: Color(0xFF8D1230),
         fontWeight: FontWeight.bold,
       ),
       bodyLarge: TextStyle(
-        fontSize: 12.5,
+        fontSize: 17.5,
         color: Colors.white,
       ),
       bodyMedium: TextStyle(

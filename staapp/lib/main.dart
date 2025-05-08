@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:staapp/screens/home_page.dart';
 import 'package:staapp/screens/menu_page.dart';
 import 'package:staapp/screens/song_request.dart';
+import 'package:staapp/screens/profile.dart';
 import 'package:staapp/theme/theme.dart';
 import 'package:staapp/theme/styles.dart';
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
@@ -56,6 +57,7 @@ class _MainNavigationState extends State<MainNavigation> {
       HomePage(changeTab: _onItemTapped),
       MenuPage(),
       SongPage(),
+      ProfilePage(),
     ];
     return Scaffold(
       body: _screens[_selectedIndex],
@@ -75,7 +77,7 @@ class _MainNavigationState extends State<MainNavigation> {
             icon: Icon(Icons.music_note),
             label: 'Songs',
           ),
-           BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),

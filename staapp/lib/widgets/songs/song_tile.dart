@@ -3,17 +3,36 @@ import 'package:staapp/theme/styles.dart';
 import 'package:staapp/theme/theme.dart';
 import 'package:staapp/screens/menu_page.dart';
 import 'package:staapp/screens/home_page.dart';
+import 'package:staapp/widgets/songs/song_voting.dart';
+import 'package:staapp/widgets/songs/song.dart';
 import 'dart:io';
 
-class SongTile extends StatelessWidget {
-  final String name;
-  final String message;
-
-  const SongTile({Key? key, required this.name, required this.message})
+class SongTile extends StatefulWidget {
+  final Song song;
+  final void Function(Song) onVote;
+  const SongTile({Key? key, required this.song, required this.onVote})
       : super(key: key);
+
+  @override
+  State<SongTile> createState() => _SongTileState();
+}
+
+class _SongTileState extends State<SongTile> {
+  late Song song;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void _addVote() {
+    widget.onVote(widget.song);
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     double widths = MediaQuery.sizeOf(context).width - 0;
 
     return Column(children: [
@@ -28,12 +47,7 @@ class SongTile extends StatelessWidget {
         ),
         child: TextButton(
             onPressed: () {
-              // Navigator.pushReplacement(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) =>
-              //           const HomePage()),
-              // );
+              _addVote();
             },
             style: TextButton.styleFrom(
                 backgroundColor: Styles.primary,
@@ -51,9 +65,19 @@ class SongTile extends StatelessWidget {
                         topLeft: Radius.circular(19),
                         bottomLeft: Radius.circular(19),
                       )),
-                  child: const Center(
-                      child: Icon(Icons.arrow_drop_up,
-                          color: Colors.white, size: 24))),
+                  child: Column(children: [
+                    const Center(
+                        child: Icon(Icons.arrow_drop_up,
+                            color: Colors.white, size: 24)),
+                    Text(
+                      widget.song.votes.length.toString(),
+                      style: theme.textTheme.bodyLarge
+                          ?.copyWith(color: Colors.white),
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ])),
               Expanded(
                   child: Container(
                       height: null,
@@ -68,7 +92,7 @@ class SongTile extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              name,
+                              widget.song.name,
                               style: theme.textTheme.displayLarge
                                   ?.copyWith(color: Styles.primary),
                               softWrap: true,
@@ -76,7 +100,7 @@ class SongTile extends StatelessWidget {
                               maxLines: 1,
                             ),
                             Text(
-                              message,
+                              widget.song.artist,
                               style: theme.textTheme.bodyLarge
                                   ?.copyWith(color: Styles.primary),
                               softWrap: true,

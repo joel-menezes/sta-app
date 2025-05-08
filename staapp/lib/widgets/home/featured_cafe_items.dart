@@ -72,6 +72,7 @@ class CafeItems extends StatelessWidget {
                                   )))),
                     ],
                   ),
+                  SizedBox(height: 15),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
