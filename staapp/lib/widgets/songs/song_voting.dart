@@ -17,15 +17,18 @@ class SongRequests extends StatefulWidget {
 }
 
 class _SongRequestsState extends State<SongRequests> {
-  late List<Song> songs;
+  late List<Song> listOfSongs;
+  final String userEmail = 'joel.menezes25@ycdsbk12.ca';
+  final bool isLoggedIn = true;
   final TextEditingController songNameController = TextEditingController();
   final TextEditingController artistNameController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    songs = [];
-    songs.sort();
+    listOfSongs = [];
+    listOfSongs.add(Song("Never Gonna Give You Up!", "Rick Astley", [userEmail]));
+    listOfSongs.sort();
   }
 
   @override
@@ -37,15 +40,19 @@ class _SongRequestsState extends State<SongRequests> {
 
   void _handleVote(Song song) {
     setState(() {
-      song.addVote("joel.menezes25@ycdsbk12.ca");
-      songs.sort();
+      if(isLoggedIn){
+      song.addVote(userEmail);
+      listOfSongs.sort();
+      }
     });
   }
 
   void _addSong(Song newSong) {
     setState(() {
-      songs.add(newSong);
-      songs.sort();
+      if(isLoggedIn){
+      listOfSongs.add(newSong);
+      listOfSongs.sort();
+      }
     });
   }
 
@@ -176,7 +183,7 @@ class _SongRequestsState extends State<SongRequests> {
                             ),
                           )),
                       SizedBox(height: 10),
-                      for (Song song in songs)
+                      for (Song song in listOfSongs)
                         SongTile(song: song, onVote: _handleVote)
                     ])),
           )),
