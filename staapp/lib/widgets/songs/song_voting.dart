@@ -27,7 +27,8 @@ class _SongRequestsState extends State<SongRequests> {
   void initState() {
     super.initState();
     listOfSongs = [];
-    listOfSongs.add(Song("Never Gonna Give You Up!", "Rick Astley", [userEmail]));
+    listOfSongs
+        .add(Song("Never Gonna Give You Up!", "Rick Astley", [userEmail]));
     listOfSongs.sort();
   }
 
@@ -40,18 +41,18 @@ class _SongRequestsState extends State<SongRequests> {
 
   void _handleVote(Song song) {
     setState(() {
-      if(isLoggedIn){
-      song.addVote(userEmail);
-      listOfSongs.sort();
+      if (isLoggedIn) {
+        song.addVote(userEmail);
+        listOfSongs.sort();
       }
     });
   }
 
   void _addSong(Song newSong) {
     setState(() {
-      if(isLoggedIn){
-      listOfSongs.add(newSong);
-      listOfSongs.sort();
+      if (isLoggedIn) {
+        listOfSongs.add(newSong);
+        listOfSongs.sort();
       }
     });
   }
@@ -63,76 +64,75 @@ class _SongRequestsState extends State<SongRequests> {
       context: context,
       builder: (BuildContext context) {
         return SizedBox(
-            // height: 300,
             child: Center(
                 child:
                     Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              Align(
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    icon: Icon(Icons.close, color: Colors.amber),
-                    onPressed: () {
-                      {
-                        Navigator.pop(context);
-                      }
-                    },
-                  )),
-              Text("Add Song",
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                      color: Styles.secondary, fontWeight: FontWeight.bold)),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: TextField(
-                  controller: songNameController,
-                  style: TextStyle(color: Styles.secondary),
-                  decoration: InputDecoration(
-                    labelText: 'Song Name',
-                    labelStyle: TextStyle(color: Styles.primary),
-                    hintText: 'Never Gonna Give You Up',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 15),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: TextField(
-                  controller: artistNameController,
-                  style: TextStyle(color: Styles.secondary),
-                  decoration: InputDecoration(
-                    labelText: 'Artist Name',
-                    labelStyle: TextStyle(color: Styles.primary),
-                    hintText: 'Rick Astley',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 15),
-              ElevatedButton(
+          Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                icon: Icon(Icons.close, color: Colors.amber),
                 onPressed: () {
-                  final songName = songNameController.text.trim();
-                  final artistName = artistNameController.text.trim();
-                  if (songName.isNotEmpty && artistName.isNotEmpty) {
-                    _addSong(Song(
-                        artistName, songName, ["joel.menezes25@ycdsbk12.ca"]));
+                  {
                     Navigator.pop(context);
                   }
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.amber,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
+              )),
+          Text("Add Song",
+              style: theme.textTheme.bodyLarge?.copyWith(
+                  color: Styles.secondary, fontWeight: FontWeight.bold)),
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: TextField(
+              controller: songNameController,
+              style: TextStyle(color: Styles.secondary),
+              decoration: InputDecoration(
+                labelText: 'Song Name',
+                labelStyle: TextStyle(color: Styles.primary),
+                hintText: 'Never Gonna Give You Up',
+                hintStyle: TextStyle(color: Colors.grey),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                child: Text('Submit', style: TextStyle(color: Colors.white)),
-              )
-            ])));
+              ),
+            ),
+          ),
+          SizedBox(height: 15),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: TextField(
+              controller: artistNameController,
+              style: TextStyle(color: Styles.secondary),
+              decoration: InputDecoration(
+                labelText: 'Artist Name',
+                labelStyle: TextStyle(color: Styles.primary),
+                hintText: 'Rick Astley',
+                hintStyle: TextStyle(color: Colors.grey),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 15),
+          ElevatedButton(
+            onPressed: () {
+              final songName = songNameController.text.trim();
+              final artistName = artistNameController.text.trim();
+              if (songName.isNotEmpty && artistName.isNotEmpty) {
+                _addSong(
+                    Song(artistName, songName, ["joel.menezes25@ycdsbk12.ca"]));
+                Navigator.pop(context);
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.amber,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+            ),
+            child: Text('Submit', style: TextStyle(color: Colors.white)),
+          )
+        ])));
       },
     );
   }

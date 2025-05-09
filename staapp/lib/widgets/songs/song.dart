@@ -2,7 +2,7 @@ class Song implements Comparable<Song> {
   final String name;
   final String artist;
   List<String> votes = [];
-  
+
   Song(this.name, this.artist, this.votes);
 
   void addVote(String vote) {

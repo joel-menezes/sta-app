@@ -65,35 +65,35 @@ class _SongTileState extends State<SongTile> {
                         topLeft: Radius.circular(19),
                         bottomLeft: Radius.circular(19),
                       )),
-                  child: Column(children : widget.song.hasVoted("joel.menezes25@ycdsbk12.ca") ? [
-                    
-                    const Center(
-                        child: Icon(Icons.arrow_drop_up,
-                            color: Colors.amber, size: 24)),
-                    Text(
-                      widget.song.votes.length.toString(),
-                      style: theme.textTheme.bodyLarge
-                          ?.copyWith(color: Colors.amber),
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                  ]:[
-                    
-                    const Center(
-                        child: Icon(Icons.arrow_drop_up,
-                            color: Colors.white, size: 24)),
-                    Text(
-                      widget.song.votes.length.toString(),
-                      style: theme.textTheme.bodyLarge
-                          ?.copyWith(color: Colors.white),
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                  ]
-                  
-                  )),
+                  child: Column(
+                      children:
+                          widget.song.hasVoted("joel.menezes25@ycdsbk12.ca")
+                              ? [
+                                  const Center(
+                                      child: Icon(Icons.arrow_drop_up,
+                                          color: Colors.amber, size: 24)),
+                                  Text(
+                                    widget.song.votes.length.toString(),
+                                    style: theme.textTheme.bodyLarge
+                                        ?.copyWith(color: Colors.amber),
+                                    softWrap: true,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                ]
+                              : [
+                                  const Center(
+                                      child: Icon(Icons.arrow_drop_up,
+                                          color: Colors.white, size: 24)),
+                                  Text(
+                                    widget.song.votes.length.toString(),
+                                    style: theme.textTheme.bodyLarge
+                                        ?.copyWith(color: Colors.white),
+                                    softWrap: true,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                ])),
               Expanded(
                   child: Container(
                       height: null,
