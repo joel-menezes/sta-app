@@ -30,6 +30,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: 2.32.0
+  firebase_auth_web: ^5.8.13
+  firebase_core_web: ^2.11.0
+  firebase_auth: ^4.1.4
+  cloud_firestore: ^4.5.0
+  http: ^0.13.6
+  html: ^0.15.4
   
 
 
@@ -41,10 +48,11 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   crystal_navigation_bar:
-  intl: ^0.18.0
+  intl: ^0.20.2
+  js: ^0.7.1
   # http: ^0.14.0
-  firebase_core: ^2.0.0
-  firebase_auth: ^4.0.0
+  
+
 
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -52,7 +60,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
