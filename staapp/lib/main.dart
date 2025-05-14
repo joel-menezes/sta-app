@@ -6,9 +6,20 @@ import 'package:staapp/screens/profile.dart';
 import 'package:staapp/theme/theme.dart';
 import 'package:staapp/theme/styles.dart';
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'firebase_options.dart';
+
+
 import 'dart:io';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  FirebaseAuth.instance.signInAnonymously();
+
   runApp(const MyApp());
 }
 
