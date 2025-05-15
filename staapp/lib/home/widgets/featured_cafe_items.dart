@@ -70,7 +70,6 @@ class CafeItems extends StatelessWidget {
                             decoration: BoxDecoration(
                               border: Border.all(
                                   color: Color(0xFF8D1230), width: 1),
-
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Card(
@@ -83,12 +82,11 @@ class CafeItems extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text('Fries',
-                                        textAlign: TextAlign.center,
+                                            textAlign: TextAlign.center,
                                             style: new TextStyle(
                                               fontSize: 15,
                                               color: Color(0xFF8D1230),
                                               fontWeight: FontWeight.bold,
-                                              
                                             )),
                                         Text(
                                           '.',
@@ -107,7 +105,6 @@ class CafeItems extends StatelessWidget {
                             decoration: BoxDecoration(
                               border: Border.all(
                                   color: Color(0xFF8D1230), width: 1),
-
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Card(
@@ -120,7 +117,7 @@ class CafeItems extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text('Chicken Burger',
-                                        textAlign: TextAlign.center,
+                                            textAlign: TextAlign.center,
                                             style: new TextStyle(
                                               fontSize: 15,
                                               color: Color(0xFF8D1230),
@@ -143,7 +140,6 @@ class CafeItems extends StatelessWidget {
                             decoration: BoxDecoration(
                               border: Border.all(
                                   color: Color(0xFF8D1230), width: 1),
-
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Card(
@@ -156,7 +152,7 @@ class CafeItems extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text('Burger With Fries',
-                                        textAlign: TextAlign.center,
+                                            textAlign: TextAlign.center,
                                             style: new TextStyle(
                                               fontSize: 15,
                                               color: Color(0xFF8D1230),

@@ -50,6 +50,7 @@ dev_dependencies:
   crystal_navigation_bar:
   intl: ^0.20.2
   js: ^0.7.1
+  
   # http: ^0.14.0
   
 

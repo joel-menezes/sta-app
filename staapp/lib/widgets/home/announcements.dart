@@ -1,3 +1,5 @@
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'dart:async';
 import 'package:staapp/widgets/home/info_box.dart';
 import 'package:flutter/material.dart';
@@ -15,21 +17,46 @@ class Announcements extends StatefulWidget {
 class _AnnouncementsState extends State<Announcements> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
+  bool loading = true;
+  String errorMessage = '';
 
-  List<String> name = [
-    "Animal Rights Committee",
-    "Athletic Council",
-    "Library",
-  ];
-  List<String> message = [
-    "Attention all animal rights committee members! There will be a yearbook photo this Thurs. Nov. 14th immediately following am announcements in the main foyer.",
-    "Friday night intramurals are back! Volleyball tournament will take place Nov. 29th. Registration begins in the back of the caf on Nov. 18. See AC's posters around the school for more information",
-    "Due to the Math Contest and OSSLT preparation sessions on Wednesday Nov 13, the library will be closed before school and during Periods 1 & 2.",
-  ];
+  List<String> name = [];
+  List<String> message = [];
+
+  Future<void> fetchAnnouncments() async {
+    try {
+      final response = await http.get(Uri.parse(
+          'https://us-central1-staugustinechsapp.cloudfunctions.net/getGeneralAnnouncements'));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          print(data);
+          for (var item in data['data']) {
+            name.add(item['title']);
+            message.add(item['content']);
+          }
+
+          loading = false;
+        });
+      } else {
+        setState(() {
+          errorMessage =
+              'Failed to load announcments. Status code: ${response.statusCode}';
+          loading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        errorMessage = 'Error: ${e.toString()}';
+        loading = false;
+      });
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+    fetchAnnouncments();
     Timer.periodic(Duration(seconds: 10), (Timer timer) {
       if (mounted) {
         _currentPage = (_currentPage + 1) % message.length;

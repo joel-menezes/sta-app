@@ -20,15 +20,14 @@ class _WelcomeBannerState extends State<WelcomeBanner> {
   bool loading = true;
   String errorMessage = '';
   late final String? name;
-  
+
   @override
   void initState() {
     super.initState();
     name = widget.name ?? 'to St. Augustine';
-    fetchDayNumber(); // Call the fetch function
+    fetchDayNumber();
   }
 
-  // Replaced fetchDayNumber method
   Future<void> fetchDayNumber() async {
     try {
       final response = await http.get(Uri.parse(
@@ -36,12 +35,14 @@ class _WelcomeBannerState extends State<WelcomeBanner> {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         setState(() {
-          dayNumber = data['data']['dayNumber']; // Extract the day number from the API response
+          dayNumber = data['data']
+              ['dayNumber']; // Extract the day number from the API response
           loading = false;
         });
       } else {
         setState(() {
-          errorMessage = 'Failed to load day number. Status code: ${response.statusCode}';
+          errorMessage =
+              'Failed to load day number. Status code: ${response.statusCode}';
           loading = false;
         });
       }
@@ -61,13 +62,7 @@ class _WelcomeBannerState extends State<WelcomeBanner> {
     final theme = Theme.of(context);
     DateTime now = DateTime.now();
     String date = DateFormat('MMMM d, y').format(now);
-    
-    // If data is still loading, show loading message
-    if (loading) {
-      return Center(child: CircularProgressIndicator());
-    }
 
-    
     return Column(children: [
       Container(
           margin: const EdgeInsets.only(top: 12.0, left: 12.0, right: 12.0),
@@ -82,10 +77,7 @@ class _WelcomeBannerState extends State<WelcomeBanner> {
               elevation: 0,
               color: Color(0xFF8D1230),
               child: Padding(
-                  padding: EdgeInsets.only(
-                      left: 16.0,
-                      top: 16.0,
-                      bottom: 16.0),
+                  padding: EdgeInsets.only(left: 16.0, top: 16.0, bottom: 16.0),
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,13 +90,19 @@ class _WelcomeBannerState extends State<WelcomeBanner> {
                               child: Wrap(
                                 children: [
                                   Text(
-                                    'Welcome ' + (name ?? "to St. Augustine") + '!',
-                                    style: theme.textTheme.displayLarge?.copyWith(color: Colors.white),
+                                    'Welcome ' +
+                                        (name ?? "to St. Augustine") +
+                                        '!',
+                                    style: theme.textTheme.displayLarge
+                                        ?.copyWith(color: Colors.white),
                                     softWrap: true,
                                   ),
                                   Container(height: 10.0),
-                                  Text('Today is a beautiful day ${dayNumber != null ? dayNumber.toString() : '0'}, ' + date,
-                                      style: theme.textTheme.bodyLarge?.copyWith(color: Colors.white))
+                                  Text(
+                                      'Today is a beautiful day ${dayNumber != null ? dayNumber.toString() : '0'}, ' +
+                                          date,
+                                      style: theme.textTheme.bodyLarge
+                                          ?.copyWith(color: Colors.white))
                                 ],
                               )),
                           const Spacer(),

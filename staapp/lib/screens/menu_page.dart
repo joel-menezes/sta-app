@@ -8,7 +8,6 @@ import 'package:staapp/theme/styles.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
-  
 
   @override
   Widget build(BuildContext context) {

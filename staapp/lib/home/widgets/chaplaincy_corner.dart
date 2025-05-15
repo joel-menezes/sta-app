@@ -37,8 +37,11 @@ class ChaplaincyCorner extends StatelessWidget {
                             color: Color(0xFF8D1230),
                             fontWeight: FontWeight.bold,
                           )),
-                     InfoBox(name: "Verse of The Day", message: 'We may throw the dice, but the LORD determines how they fall. (Proverbs 16:33)'),
-                                         ])),
+                      InfoBox(
+                          name: "Verse of The Day",
+                          message:
+                              'We may throw the dice, but the LORD determines how they fall. (Proverbs 16:33)'),
+                    ])),
           ))
     ]);
   }

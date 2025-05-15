@@ -10,7 +10,6 @@ import 'package:staapp/theme/styles.dart';
 import 'package:staapp/theme/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class SongRequests extends StatefulWidget {
   const SongRequests({Key? key}) : super(key: key);
 
@@ -25,16 +24,12 @@ class _SongRequestsState extends State<SongRequests> {
   final TextEditingController songNameController = TextEditingController();
   final TextEditingController artistNameController = TextEditingController();
 
-
-
   @override
   void initState() {
     super.initState();
     listOfSongs = [];
-    // listOfSongs
-        // .add(Song("Never Gonna Give You Up!", "Rick Astley", [userEmail]));
-        
-        getAllSongs();
+
+    getAllSongs();
     listOfSongs.sort();
   }
 
@@ -45,28 +40,27 @@ class _SongRequestsState extends State<SongRequests> {
     super.dispose();
   }
 
-
-
-
   void getAllSongs() async {
-  QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('newSongs').get();
-  listOfSongs.clear();
-  
-  for (var doc in snapshot.docs) {
-    var datastore = doc.data() as Map<String, dynamic>;
-    print(datastore);
-    try{
-    Song song = Song(datastore['name'], datastore['artist'], List<String>.from(datastore['votes']), doc.id);
-    
-   setState(() {
-      listOfSongs.add(song);
-    });
-    }
-    catch (e){
-      print("error $e");
+    QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection('newSongs').get();
+    listOfSongs.clear();
+
+    for (var doc in snapshot.docs) {
+      var datastore = doc.data() as Map<String, dynamic>;
+      print(datastore);
+      try {
+        Song song = Song(datastore['name'], datastore['artist'],
+            List<String>.from(datastore['votes']), doc.id);
+
+        setState(() {
+          listOfSongs.add(song);
+        });
+      } catch (e) {
+        print("error $e");
+      }
     }
   }
-}
+
   void _handleVote(Song song) {
     setState(() {
       if (isLoggedIn) {
@@ -76,24 +70,22 @@ class _SongRequestsState extends State<SongRequests> {
     });
   }
 
-  void _addSong(Song newSong)  async {
+  void _addSong(Song newSong) async {
     setState(() async {
       if (isLoggedIn) {
         listOfSongs.add(newSong);
         listOfSongs.sort();
 
         await FirebaseFirestore.instance.collection('newSongs').add({
-    'artist': newSong.artist,
-    'createdAt': FieldValue.serverTimestamp(), 
-    'creatorEmail': 'joel.menezes25@ycdsbk12.ca',
-    'name': newSong.name,
-    'votes': ['joel.menezes25@ycdsbk12.ca'],
-  });
-
-
+          'artist': newSong.artist,
+          'createdAt': FieldValue.serverTimestamp(),
+          'creatorEmail': 'joel.menezes25@ycdsbk12.ca',
+          'name': newSong.name,
+          'votes': ['joel.menezes25@ycdsbk12.ca'],
+        });
       }
-    getAllSongs();
-    listOfSongs.sort();
+      getAllSongs();
+      listOfSongs.sort();
     });
   }
 
