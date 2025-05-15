@@ -8,6 +8,7 @@ import 'dart:collection';
 import 'dart:io';
 import 'package:staapp/theme/styles.dart';
 import 'package:staapp/theme/theme.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SongRequests extends StatefulWidget {
   const SongRequests({Key? key}) : super(key: key);
@@ -27,8 +28,8 @@ class _SongRequestsState extends State<SongRequests> {
   void initState() {
     super.initState();
     listOfSongs = [];
-    listOfSongs
-        .add(Song("Never Gonna Give You Up!", "Rick Astley", [userEmail]));
+
+    getAllSongs();
     listOfSongs.sort();
   }
 
@@ -37,6 +38,27 @@ class _SongRequestsState extends State<SongRequests> {
     songNameController.dispose();
     artistNameController.dispose();
     super.dispose();
+  }
+
+  void getAllSongs() async {
+    QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection('newSongs').get();
+    listOfSongs.clear();
+
+    for (var doc in snapshot.docs) {
+      var datastore = doc.data() as Map<String, dynamic>;
+      print(datastore);
+      try {
+        Song song = Song(datastore['name'], datastore['artist'],
+            List<String>.from(datastore['votes']), doc.id);
+
+        setState(() {
+          listOfSongs.add(song);
+        });
+      } catch (e) {
+        print("error $e");
+      }
+    }
   }
 
   void _handleVote(Song song) {
@@ -48,12 +70,22 @@ class _SongRequestsState extends State<SongRequests> {
     });
   }
 
-  void _addSong(Song newSong) {
-    setState(() {
+  void _addSong(Song newSong) async {
+    setState(() async {
       if (isLoggedIn) {
         listOfSongs.add(newSong);
         listOfSongs.sort();
+
+        await FirebaseFirestore.instance.collection('newSongs').add({
+          'artist': newSong.artist,
+          'createdAt': FieldValue.serverTimestamp(),
+          'creatorEmail': 'joel.menezes25@ycdsbk12.ca',
+          'name': newSong.name,
+          'votes': ['joel.menezes25@ycdsbk12.ca'],
+        });
       }
+      getAllSongs();
+      listOfSongs.sort();
     });
   }
 
@@ -121,7 +153,7 @@ class _SongRequestsState extends State<SongRequests> {
               final artistName = artistNameController.text.trim();
               if (songName.isNotEmpty && artistName.isNotEmpty) {
                 _addSong(
-                    Song(artistName, songName, ["joel.menezes25@ycdsbk12.ca"]));
+                    Song(songName, artistName, ["joel.menezes25@ycdsbk12.ca"]));
                 Navigator.pop(context);
               }
             },

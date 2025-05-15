@@ -8,13 +8,15 @@ class FoodTile extends StatelessWidget {
   final double heights;
   final double widths;
   final String? price;
+  final String? url;
 
   const FoodTile(
       {Key? key,
       required this.name,
       required this.heights,
       required this.widths,
-      this.price})
+      this.price,
+      this.url})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -42,8 +44,9 @@ class FoodTile extends StatelessWidget {
             child: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                  image:
-                      AssetImage('assets/placeholders/unavailable-image.png'),
+                  image: NetworkImage((url ??
+                      'https://storage.googleapis.com/staugustinechsapp.appspot.com/newCafeMenuItems/Unavailable%20Image.jpg?GoogleAccessId=staugustinechsapp%40appspot.gserviceaccount.com&Expires=1747867466&Signature=W7RcP0OAAm29V%2BJddAY%2F88TNEUGbU0nn78q6CdOUoN5uD2qtHr07b36yz227X%2F1sHwOEqtn5F%2BtTBaO7GGsIJtEeg9WWBAxTOHEQmYFVpBGKdHVKkmLF5qH%2Bka2VhsJpBtlr22cnxDfK6SRboDPaa4cWXHt05CwGr55nLf9B67T2xApf3EJUubLkzL273gKP1ib4i9W6DkAV0PPyyhwasWBEsimbFhU8eip1g85XdpK4OSgGVY2j14ENr6VTwABEKJK4AHjCp7vJJqKE%2Frm1lb5EgI%2B2qvwY2YX75M0tQjD5YXawLidVedHxC4oFdz3xDwirKgI3xgQmtdj6cLgrsg%3D%3D')),
+                  // AssetImage('assets/placeholders/unavailable-image.png'),
                   fit: BoxFit.cover,
                 )),
                 child: Column(

@@ -1,11 +1,55 @@
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:staapp/widgets/home/info_box.dart';
 import 'package:staapp/theme/styles.dart';
 import 'package:staapp/theme/theme.dart';
 import 'dart:io';
 
-class ChaplaincyCorner extends StatelessWidget {
+class ChaplaincyCorner extends StatefulWidget {
   const ChaplaincyCorner({Key? key}) : super(key: key);
+
+  @override
+  State<ChaplaincyCorner> createState() => _ChaplaincyCornerState();
+}
+
+class _ChaplaincyCornerState extends State<ChaplaincyCorner> {
+  String? verse;
+  bool loading = true;
+  String errorMessage = '';
+  @override
+  void initState() {
+    super.initState();
+    fetchVerseOfDay();
+  }
+
+  Future<void> fetchVerseOfDay() async {
+    try {
+      final response = await http.get(Uri.parse(
+          'https://us-central1-staugustinechsapp.cloudfunctions.net/getVerseOfDay'));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          print(data);
+          verse = data['data']['verseOfDay'];
+
+          loading = false;
+        });
+      } else {
+        setState(() {
+          errorMessage =
+              'Failed to load announcments. Status code: ${response.statusCode}';
+          loading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        errorMessage = 'Error: ${e.toString()}';
+        loading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double widths = MediaQuery.sizeOf(context).width < 650
@@ -36,8 +80,8 @@ class ChaplaincyCorner extends StatelessWidget {
                               ?.copyWith(color: Styles.primary)),
                       InfoBox(
                           name: "Verse of The Day",
-                          message:
-                              'We may throw the dice, but the LORD determines how they fall. (Proverbs 16:33)'),
+                          message: (verse ??
+                              'We may throw the dice, but the LORD determines how they fall. (Proverbs 16:33)')),
                     ])),
           ))
     ]);
