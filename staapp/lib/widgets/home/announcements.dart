@@ -30,7 +30,6 @@ class _AnnouncementsState extends State<Announcements> {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         setState(() {
-          print(data);
           for (var item in data['data']) {
             name.add(item['title']);
             message.add(item['content']);

@@ -30,7 +30,6 @@ class _ChaplaincyCornerState extends State<ChaplaincyCorner> {
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
         setState(() {
-          print(data);
           verse = data['data']['verseOfDay'];
 
           loading = false;

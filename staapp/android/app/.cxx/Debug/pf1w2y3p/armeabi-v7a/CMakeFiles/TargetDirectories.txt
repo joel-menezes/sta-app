@@ -1,0 +1,2 @@
+C:/Users/goodj/Desktop/New folder (5)/sta-app/staapp/android/app/.cxx/Debug/pf1w2y3p/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/goodj/Desktop/New folder (5)/sta-app/staapp/android/app/.cxx/Debug/pf1w2y3p/armeabi-v7a/CMakeFiles/rebuild_cache.dir

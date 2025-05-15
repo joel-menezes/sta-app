@@ -1,9 +1,8 @@
-// class MenuItem{
-//         bool isTodaysSpecial;
-//         String name;
-//         String pictureId;
-//         double price;
-//         String itemID;
-//
-//         MenuItem(this.isTodaysSpecial, this.name, this.pictureId, this.price, itemID)
-// }
+class MenuItem {
+  String name;
+  String price;
+  String url;
+  bool isTodaysSpecial;
+
+  MenuItem(this.name, this.price, this.url, this.isTodaysSpecial);
+}
