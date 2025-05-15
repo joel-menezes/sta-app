@@ -1,10 +1,50 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:staapp/theme/styles.dart';
 import 'package:staapp/theme/theme.dart';
 import 'dart:io';
 
-class SpiritMeter extends StatelessWidget {
+class SpiritMeter extends StatefulWidget {
   const SpiritMeter({Key? key}) : super(key: key);
+
+  @override
+  State<SpiritMeter> createState() => _SpiritMeterState();
+}
+
+class _SpiritMeterState extends State<SpiritMeter> {
+  int? gr9;
+  int? gr10;
+  int? gr11;
+  int? gr12;
+
+  @override
+  void initState() {
+    super.initState();
+    getSpiritMeter();
+  }
+
+  void getSpiritMeter() async {
+    DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+        .instance
+        .collection('newSpiritMeters')
+        .doc("spiritMeters")
+        .get();
+    final data = snapshot.data();
+    print(data);
+    try {
+      if (data != null) {
+        setState(() {
+          gr9 = data["nine"];
+          gr10 = data["ten"];
+          gr11 = data["eleven"];
+          gr12 = data["twelve"];
+        });
+      }
+    } catch (e) {
+      print("error $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double widths = MediaQuery.sizeOf(context).width < 650
@@ -43,7 +83,7 @@ class SpiritMeter extends StatelessWidget {
                             Container(
                               margin:
                                   const EdgeInsets.only(top: 12.0, left: 31),
-                              width: 150.0,
+                              width: 280.0 / 100.0 * (gr9 ?? 50.0),
                               height: null,
                               decoration: BoxDecoration(
                                 color: Color(0xFF8D1230),
@@ -67,7 +107,7 @@ class SpiritMeter extends StatelessWidget {
                             Container(
                               margin:
                                   const EdgeInsets.only(top: 12.0, left: 22),
-                              width: 130.0,
+                              width: 280.0 / 100.0 * (gr10 ?? 50.0),
                               height: null,
                               decoration: BoxDecoration(
                                 color: Color(0xFF8D1230),
@@ -91,7 +131,7 @@ class SpiritMeter extends StatelessWidget {
                             Container(
                               margin:
                                   const EdgeInsets.only(top: 12.0, left: 22),
-                              width: 165.0,
+                              width: 280.0 / 100.0 * (gr11 ?? 50.0),
                               height: null,
                               decoration: BoxDecoration(
                                 color: Color(0xFF8D1230),
@@ -115,7 +155,7 @@ class SpiritMeter extends StatelessWidget {
                             Container(
                               margin:
                                   const EdgeInsets.only(top: 12.0, left: 22),
-                              width: 180.0,
+                              width: 280.0 / 100.0 * (gr12 ?? 75.0),
                               height: null,
                               decoration: BoxDecoration(
                                 color: Color(0xFF8D1230),
