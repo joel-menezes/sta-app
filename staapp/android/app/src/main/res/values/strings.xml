@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">STA App</string>
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_text">Day Number Small Widget</string>
     <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">This is an app widget description</string>
+    <string name="app_widget_description">1 x 1 app widget telling you the St. A Day Number </string>
 </resources>

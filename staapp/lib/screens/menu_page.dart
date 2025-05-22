@@ -19,10 +19,10 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage> {
   List<MenuItem> specials = [];
   List<MenuItem> regulars = [];
-   bool loading = true;
+  bool loading = true;
   String errorMessage = '';
 
-    Future<void> fetchFoodItems() async {
+  Future<void> fetchFoodItems() async {
     try {
       final response = await http.get(Uri.parse(
           'https://us-central1-staugustinechsapp.cloudfunctions.net/getCafeMenuItems'));
@@ -30,18 +30,18 @@ class _MenuPageState extends State<MenuPage> {
         final data = json.decode(response.body);
         setState(() {
           for (var item in data['data']) {
-            if (item['isTodaysSpecial'] == true){
-              specials.add(
-                  new MenuItem( item['name'],  item['price'].toStringAsFixed(2),
-                   item['pictureUrl'],
-                   item['isTodaysSpecial']));
-
-            }
-            else
-              regulars.add(
-                  new MenuItem( item['name'],  item['price'].toStringAsFixed(2),
-                   item['pictureUrl'],
-                   item['isTodaysSpecial']));
+            if (item['isTodaysSpecial'] == true) {
+              specials.add(new MenuItem(
+                  item['name'],
+                  item['price'].toStringAsFixed(2),
+                  item['pictureUrl'],
+                  item['isTodaysSpecial']));
+            } else
+              regulars.add(new MenuItem(
+                  item['name'],
+                  item['price'].toStringAsFixed(2),
+                  item['pictureUrl'],
+                  item['isTodaysSpecial']));
           }
 
           loading = false;
@@ -80,7 +80,7 @@ class _MenuPageState extends State<MenuPage> {
           child: SingleChildScrollView(
               child: Column(children: [
         Header(name: "Cafeteria Menu"),
-        Specials(items: specials), 
+        Specials(items: specials),
         Menu(items: regulars),
       ]))),
     );

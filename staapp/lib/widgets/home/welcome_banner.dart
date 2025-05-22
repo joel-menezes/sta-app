@@ -6,6 +6,9 @@ import 'package:staapp/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/foundation.dart';
 
 class WelcomeBanner extends StatefulWidget {
   final String? name;
@@ -16,16 +19,29 @@ class WelcomeBanner extends StatefulWidget {
 }
 
 class _WelcomeBannerState extends State<WelcomeBanner> {
-  int? dayNumber;
   bool loading = true;
+  User? _user;
+  late final Stream<User?> authState;
+  int? dayNumber;
   String errorMessage = '';
-  late final String? name;
+  String? name;
 
   @override
   void initState() {
     super.initState();
-    name = widget.name ?? 'to St. Augustine';
-    fetchDayNumber();
+    authState = FirebaseAuth.instance.authStateChanges();
+    authState.first.then((user) {
+      setState(() {
+        _user = user;
+        print(_user);
+        if (_user?.displayName == null || _user?.displayName == '' || _user?.displayName == ' '){
+          name = 'to St. Augustine';
+        }else{
+          name = _user?.displayName ?? 'to St. Augustine';
+        }
+      });
+      fetchDayNumber();
+    });
   }
 
   Future<void> fetchDayNumber() async {

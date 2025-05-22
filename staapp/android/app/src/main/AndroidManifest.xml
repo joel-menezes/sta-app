@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.staapp">
+    package= "com.staugustinechs.app"> 
+    <!-- "com.example.staapp" -->
 
     <uses-permission android:name="android.permission.INTERNET" />
     <!--
@@ -17,13 +18,14 @@
             <data android:mimeType="text/plain" />
         </intent>
     </queries>
+<uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:label="staapp">
         <receiver
-            android:name=".NewAppWidget"
+            android:name=".DayNumberSmall"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -31,42 +33,7 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/new_app_widget_info" />
-        </receiver>
-
-        <!-- Registering small widget -->
-        <receiver
-            android:name=".WidgetSmallProvider"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_small_info" />
-        </receiver> <!-- Registering medium widget -->
-        <receiver
-            android:name=".WidgetMediumProvider"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_medium_info" />
-        </receiver> <!-- Registering large widget -->
-        <receiver
-            android:name=".WidgetLargeProvider"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/widget_large_info" />
+                android:resource="@xml/day_number_small_info" />
         </receiver>
 
         <activity

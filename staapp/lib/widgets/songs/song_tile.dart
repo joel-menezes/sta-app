@@ -6,6 +6,10 @@ import 'package:staapp/screens/home_page.dart';
 import 'package:staapp/widgets/songs/song_voting.dart';
 import 'package:staapp/widgets/songs/song.dart';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/foundation.dart';
 
 class SongTile extends StatefulWidget {
   final Song song;
@@ -19,10 +23,24 @@ class SongTile extends StatefulWidget {
 
 class _SongTileState extends State<SongTile> {
   late Song song;
+  String userEmail = "";
+
+  User? _user;
+  late final Stream<User?> authState;
 
   @override
   void initState() {
     super.initState();
+
+    authState = FirebaseAuth.instance.authStateChanges();
+    authState.first.then((user) {
+      setState(() {
+        _user = user;
+        print(_user);
+
+        userEmail = _user?.email ?? "";
+      });
+    });
   }
 
   void _addVote() {
@@ -66,34 +84,33 @@ class _SongTileState extends State<SongTile> {
                         bottomLeft: Radius.circular(19),
                       )),
                   child: Column(
-                      children:
-                          widget.song.hasVoted("joel.menezes25@ycdsbk12.ca")
-                              ? [
-                                  const Center(
-                                      child: Icon(Icons.arrow_drop_up,
-                                          color: Colors.amber, size: 24)),
-                                  Text(
-                                    widget.song.votes.length.toString(),
-                                    style: theme.textTheme.bodyLarge
-                                        ?.copyWith(color: Colors.amber),
-                                    softWrap: true,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                  ),
-                                ]
-                              : [
-                                  const Center(
-                                      child: Icon(Icons.arrow_drop_up,
-                                          color: Colors.white, size: 24)),
-                                  Text(
-                                    widget.song.votes.length.toString(),
-                                    style: theme.textTheme.bodyLarge
-                                        ?.copyWith(color: Colors.white),
-                                    softWrap: true,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                  ),
-                                ])),
+                      children: widget.song.hasVoted(userEmail)
+                          ? [
+                              const Center(
+                                  child: Icon(Icons.arrow_drop_up,
+                                      color: Colors.amber, size: 24)),
+                              Text(
+                                widget.song.votes.length.toString(),
+                                style: theme.textTheme.bodyLarge
+                                    ?.copyWith(color: Colors.amber),
+                                softWrap: true,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                              ),
+                            ]
+                          : [
+                              const Center(
+                                  child: Icon(Icons.arrow_drop_up,
+                                      color: Colors.white, size: 24)),
+                              Text(
+                                widget.song.votes.length.toString(),
+                                style: theme.textTheme.bodyLarge
+                                    ?.copyWith(color: Colors.white),
+                                softWrap: true,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                              ),
+                            ])),
               Expanded(
                   child: Container(
                       height: null,

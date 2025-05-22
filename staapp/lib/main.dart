@@ -1,3 +1,6 @@
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:home_widget/home_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:staapp/screens/home_page.dart';
 import 'package:staapp/screens/menu_page.dart';
@@ -9,6 +12,8 @@ import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
+import 'package:flutter/foundation.dart';
+import 'data.dart';
 
 import 'dart:io';
 
@@ -17,10 +22,15 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseAuth.instance.signInAnonymously();
+  final currentUser = FirebaseAuth.instance.currentUser;
+
+  print(currentUser);
+
+  if (currentUser == null) FirebaseAuth.instance.signInAnonymously();
 
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -54,11 +64,67 @@ class MainNavigation extends StatefulWidget {
 
 class _MainNavigationState extends State<MainNavigation> {
   int _selectedIndex = 0; // Tracks the currently selected tab
+String appGroupId = 'com.staugustinechs.app';           
+ String iOSWidgetName = 'DayNumberSmall';
+ String androidWidgetName = 'DayNumberSmall'; 
+
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+
+
+void updateWidgets(String day) {            
+  HomeWidget.saveWidgetData<String>(
+      'day_number', day);
+  HomeWidget.updateWidget(
+    iOSName: iOSWidgetName,
+    androidName: androidWidgetName,
+  );
+}   
+
+int? dayNumber;
+bool loading = true;
+String  errorMessage = '';
+  Future<void> fetchDayNumber() async {
+    try {
+      final response = await http.get(Uri.parse(
+          'https://us-central1-staugustinechsapp.cloudfunctions.net/getDayNumber'));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          dayNumber = data['data']
+              ['dayNumber']; // Extract the day number from the API response
+              updateWidgets(dayNumber.toString());
+          loading = false;
+        });
+      } else {
+        setState(() {
+          errorMessage =
+              'Failed to load day number. Status code: ${response.statusCode}';
+          loading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        errorMessage = 'Error: ${e.toString()}';
+        loading = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    
+    setState((){
+      fetchDayNumber();
+      // updateWidgets(dayNumber.toString());
+    });
+    
   }
 
   @override

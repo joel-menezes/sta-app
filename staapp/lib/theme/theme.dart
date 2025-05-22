@@ -25,9 +25,9 @@ ThemeData lightThemePhone = ThemeData(
   brightness: Brightness.light,
   textTheme: const TextTheme(
       displayLarge: TextStyle(
-        fontSize: 30,
+        fontSize: 25,
         // color: Color(0xFF8D1230),
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.normal,
       ),
       bodyLarge: TextStyle(
         fontSize: 17.5,

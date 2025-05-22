@@ -4,14 +4,16 @@ import 'package:staapp/theme/styles.dart';
 import 'dart:io';
 import 'package:staapp/widgets/menu/menu_items.dart';
 
-
 class FoodTile extends StatelessWidget {
   final MenuItem item;
   final double heights;
   final double widths;
-  
+
   const FoodTile(
-      {Key? key, required this.heights, required this.widths, required this.item})
+      {Key? key,
+      required this.heights,
+      required this.widths,
+      required this.item})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,9 @@ class FoodTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      (item.price == null || item.price!.isEmpty || item.price == "null")
+                      (item.price == null ||
+                              item.price!.isEmpty ||
+                              item.price == "null")
                           ? Text(item.name,
                               textAlign: TextAlign.center,
                               style: theme.textTheme.bodyLarge?.copyWith(

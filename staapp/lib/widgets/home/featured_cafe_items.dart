@@ -32,10 +32,11 @@ class _CafeItemsState extends State<CafeItems> {
         final data = json.decode(response.body);
         setState(() {
           for (var item in data['data']) {
-            items.add(
-                  new MenuItem(item['name'], item['price'].toStringAsFixed(2),
-                  item['pictureUrl'],
-                  item['isTodaysSpecial']));
+            items.add(new MenuItem(
+                item['name'],
+                item['price'].toStringAsFixed(2),
+                item['pictureUrl'],
+                item['isTodaysSpecial']));
           }
 
           loading = false;
@@ -131,10 +132,10 @@ class _CafeItemsState extends State<CafeItems> {
 // Only do 3 food items, for space reasons
 
                           FoodTile(
-                              item: items[i],
-                              heights: heights,
-                              widths: widths * 0.3 - 12,
-                             ),
+                            item: items[i],
+                            heights: heights,
+                            widths: widths * 0.3 - 12,
+                          ),
                       ])
                 ])),
           )),

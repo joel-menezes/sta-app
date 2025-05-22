@@ -9,6 +9,9 @@ import 'dart:io';
 import 'package:staapp/theme/styles.dart';
 import 'package:staapp/theme/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter/foundation.dart';
 
 class SongRequests extends StatefulWidget {
   const SongRequests({Key? key}) : super(key: key);
@@ -18,19 +21,37 @@ class SongRequests extends StatefulWidget {
 }
 
 class _SongRequestsState extends State<SongRequests> {
-  late List<Song> listOfSongs;
-  final String userEmail = 'joel.menezes25@ycdsbk12.ca';
-  final bool isLoggedIn = true;
+  List<Song> listOfSongs = [];
+  String userEmail = "";
+  bool isLoggedIn = true;
   final TextEditingController songNameController = TextEditingController();
   final TextEditingController artistNameController = TextEditingController();
+
+  // Google Variables
+  User? _user;
+  late final Stream<User?> authState;
 
   @override
   void initState() {
     super.initState();
-    listOfSongs = [];
 
-    getAllSongs();
-    listOfSongs.sort();
+    authState = FirebaseAuth.instance.authStateChanges();
+    authState.first.then((user) {
+      setState(() {
+        _user = user;
+        print(_user);
+
+        userEmail = _user?.email ?? "";
+        if (userEmail == "")
+          isLoggedIn = false;
+        else
+          isLoggedIn = true;
+      });
+      listOfSongs = [];
+
+      getAllSongs();
+      listOfSongs.sort();
+    });
   }
 
   @override
@@ -79,9 +100,9 @@ class _SongRequestsState extends State<SongRequests> {
         await FirebaseFirestore.instance.collection('newSongs').add({
           'artist': newSong.artist,
           'createdAt': FieldValue.serverTimestamp(),
-          'creatorEmail': 'joel.menezes25@ycdsbk12.ca',
+          'creatorEmail': 'userEmail',
           'name': newSong.name,
-          'votes': ['joel.menezes25@ycdsbk12.ca'],
+          'votes': ['userEmail'],
         });
       }
       getAllSongs();
@@ -94,77 +115,86 @@ class _SongRequestsState extends State<SongRequests> {
 
     showModalBottomSheet<void>(
       context: context,
+      isScrollControlled: true,
       builder: (BuildContext context) {
-        return SizedBox(
-            child: Center(
-                child:
-                    Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-          Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                icon: Icon(Icons.close, color: Colors.amber),
-                onPressed: () {
-                  {
-                    Navigator.pop(context);
-                  }
-                },
-              )),
-          Text("Add Song",
-              style: theme.textTheme.bodyLarge?.copyWith(
-                  color: Styles.secondary, fontWeight: FontWeight.bold)),
-          SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: TextField(
-              controller: songNameController,
-              style: TextStyle(color: Styles.secondary),
-              decoration: InputDecoration(
-                labelText: 'Song Name',
-                labelStyle: TextStyle(color: Styles.primary),
-                hintText: 'Never Gonna Give You Up',
-                hintStyle: TextStyle(color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
+        return Padding(
+            // This makes sure the modal isn't covered by the keyboard
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
-          ),
-          SizedBox(height: 15),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: TextField(
-              controller: artistNameController,
-              style: TextStyle(color: Styles.secondary),
-              decoration: InputDecoration(
-                labelText: 'Artist Name',
-                labelStyle: TextStyle(color: Styles.primary),
-                hintText: 'Rick Astley',
-                hintStyle: TextStyle(color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 15),
-          ElevatedButton(
-            onPressed: () {
-              final songName = songNameController.text.trim();
-              final artistName = artistNameController.text.trim();
-              if (songName.isNotEmpty && artistName.isNotEmpty) {
-                _addSong(
-                    Song(songName, artistName, ["joel.menezes25@ycdsbk12.ca"]));
-                Navigator.pop(context);
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.amber,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-            ),
-            child: Text('Submit', style: TextStyle(color: Colors.white)),
-          )
-        ])));
+            child: SingleChildScrollView(
+                child: SizedBox(
+                    child: Center(
+                        child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                  Align(
+                      alignment: Alignment.topRight,
+                      child: IconButton(
+                        icon: Icon(Icons.close, color: Colors.amber),
+                        onPressed: () {
+                          {
+                            Navigator.pop(context);
+                          }
+                        },
+                      )),
+                  Text("Add Song",
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                          color: Styles.secondary,
+                          fontWeight: FontWeight.bold)),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: TextField(
+                      controller: songNameController,
+                      style: TextStyle(color: Styles.secondary),
+                      decoration: InputDecoration(
+                        labelText: 'Song Name',
+                        labelStyle: TextStyle(color: Styles.primary),
+                        hintText: 'Never Gonna Give You Up',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: TextField(
+                      controller: artistNameController,
+                      style: TextStyle(color: Styles.secondary),
+                      decoration: InputDecoration(
+                        labelText: 'Artist Name',
+                        labelStyle: TextStyle(color: Styles.primary),
+                        hintText: 'Rick Astley',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  ElevatedButton(
+                    onPressed: () {
+                      final songName = songNameController.text.trim();
+                      final artistName = artistNameController.text.trim();
+                      if (songName.isNotEmpty && artistName.isNotEmpty) {
+                        _addSong(Song(songName, artistName, ["userEmail"]));
+                        Navigator.pop(context);
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.amber,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                    child:
+                        Text('Submit', style: TextStyle(color: Colors.white)),
+                  )
+                ])))));
       },
     );
   }

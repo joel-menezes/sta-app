@@ -5,10 +5,13 @@ import 'dart:io';
 
 class Styles {
   static const Color primary = Color(0xff8D1230);
+  static const Color white = Colors.white;
   static const Color secondary = Color(0xffD8AE1A);
+  static const String fontFamilyTitles = 'Raleway';
+   static const String fontFamilyNormal = 'SourceSansPro';
 
   // Phone Variables
-  static const int phoneWidth = 650;
+  static const int phoneWidth = 649;
   static const double phonePadding = 16.0;
 
   // TV Variables
