@@ -57,7 +57,7 @@ Future<void> backgroundTask() async {
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final dayNumber = data['data']['dayNumber'].toString();
-      
+
       // Save and update widget
       await HomeWidget.saveWidgetData<String>('day_number', dayNumber);
       await HomeWidget.updateWidget(
@@ -82,9 +82,9 @@ void main() async {
 
   print(currentUser);
 
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
- const AndroidInitializationSettings androidSettings =
+  const AndroidInitializationSettings androidSettings =
       AndroidInitializationSettings('@mipmap/ic_launcher');
 
   const InitializationSettings initSettings =
@@ -94,10 +94,7 @@ void main() async {
 
   if (currentUser == null) FirebaseAuth.instance.signInAnonymously();
 
-
   //  await AndroidAlarmManager.initialize();
-
-
 
 //   Workmanager().registerOneOffTask(
 //   "testRandomDay",
@@ -106,7 +103,6 @@ void main() async {
 
   runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -140,11 +136,9 @@ class MainNavigation extends StatefulWidget {
 
 class _MainNavigationState extends State<MainNavigation> {
   int _selectedIndex = 0; // Tracks the currently selected tab
-String appGroupId = 'com.staugustinechs.app';           
- String iOSWidgetName = 'DayNumberSmall';
- String androidWidgetName = 'DayNumberSmall'; 
-
-
+  String appGroupId = 'com.staugustinechs.app';
+  String iOSWidgetName = 'DayNumberSmall';
+  String androidWidgetName = 'DayNumberSmall';
 
   void _onItemTapped(int index) {
     setState(() {
@@ -152,20 +146,17 @@ String appGroupId = 'com.staugustinechs.app';
     });
   }
 
+  void updateWidgets(String day) {
+    HomeWidget.saveWidgetData<String>('day_number', day);
+    HomeWidget.updateWidget(
+      iOSName: iOSWidgetName,
+      androidName: androidWidgetName,
+    );
+  }
 
-
-void updateWidgets(String day) {            
-  HomeWidget.saveWidgetData<String>(
-      'day_number', day);
-  HomeWidget.updateWidget(
-    iOSName: iOSWidgetName,
-    androidName: androidWidgetName,
-  );
-}   
-
-int? dayNumber;
-bool loading = true;
-String  errorMessage = '';
+  int? dayNumber;
+  bool loading = true;
+  String errorMessage = '';
   Future<void> fetchDayNumber() async {
     try {
       final response = await http.get(Uri.parse(
@@ -175,7 +166,7 @@ String  errorMessage = '';
         setState(() {
           dayNumber = data['data']
               ['dayNumber']; // Extract the day number from the API response
-              updateWidgets(dayNumber.toString());
+          updateWidgets(dayNumber.toString());
           loading = false;
         });
       } else {
@@ -197,12 +188,11 @@ String  errorMessage = '';
   void initState() {
     super.initState();
     setupFirebaseMessaging();
-    
-    setState((){
+
+    setState(() {
       fetchDayNumber();
       // updateWidgets(dayNumber.toString());
     });
-    
   }
 
   void setupFirebaseMessaging() async {

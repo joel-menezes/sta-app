@@ -55,22 +55,19 @@ class FoodTile extends StatelessWidget {
                               item.price == "null")
                           ? Text(item.name,
                               textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-
+                              overflow: TextOverflow.ellipsis,
                               style: theme.textTheme.bodyLarge?.copyWith(
                                   color: Styles.primary,
                                   fontWeight: FontWeight.bold))
                           : Text(item.name,
                               textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-
+                              overflow: TextOverflow.ellipsis,
                               style: theme.textTheme.bodyLarge?.copyWith(
                                   color: Styles.primary,
                                   fontWeight: FontWeight.bold)),
                       Text('\$${item.price}',
                           textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
-
+                          overflow: TextOverflow.ellipsis,
                           style: theme.textTheme.bodyLarge?.copyWith(
                               color: Styles.primary,
                               fontWeight: FontWeight.bold)),

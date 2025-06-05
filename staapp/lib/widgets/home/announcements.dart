@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
@@ -24,32 +25,23 @@ class _AnnouncementsState extends State<Announcements> {
   List<String> message = [];
 
   Future<void> fetchAnnouncments() async {
-    try {
-      final response = await http.get(Uri.parse(
-          'https://us-central1-staugustinechsapp.cloudfunctions.net/getGeneralAnnouncements'));
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        setState(() {
-          for (var item in data['data']) {
-            name.add(item['title']);
-            message.add(item['content']);
-          }
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('newGeneralAnnouncements')
+        .get();
 
-          loading = false;
-        });
-      } else {
+    for (var doc in snapshot.docs) {
+      var datastore = doc.data() as Map<String, dynamic>;
+      print(datastore);
+      try {
         setState(() {
-          errorMessage =
-              'Failed to load announcments. Status code: ${response.statusCode}';
-          loading = false;
+          name.add(datastore['title']);
+          message.add(datastore['content']);
         });
+      } catch (e) {
+        print("error $e");
       }
-    } catch (e) {
-      setState(() {
-        errorMessage = 'Error: ${e.toString()}';
-        loading = false;
-      });
     }
+    loading = false;
   }
 
   @override

@@ -8,7 +8,7 @@ class Styles {
   static const Color white = Colors.white;
   static const Color secondary = Color(0xffD8AE1A);
   static const String fontFamilyTitles = 'Raleway';
-   static const String fontFamilyNormal = 'SourceSansPro';
+  static const String fontFamilyNormal = 'SourceSansPro';
 
   // Phone Variables
   static const int phoneWidth = 649;

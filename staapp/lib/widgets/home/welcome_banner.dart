@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -34,9 +36,11 @@ class _WelcomeBannerState extends State<WelcomeBanner> {
       setState(() {
         _user = user;
         print(_user);
-        if (_user?.displayName == null || _user?.displayName == '' || _user?.displayName == ' '){
+        if (_user?.displayName == null ||
+            _user?.displayName == '' ||
+            _user?.displayName == ' ') {
           name = 'to St. Augustine';
-        }else{
+        } else {
           name = _user?.displayName ?? 'to St. Augustine';
         }
       });
@@ -45,29 +49,47 @@ class _WelcomeBannerState extends State<WelcomeBanner> {
   }
 
   Future<void> fetchDayNumber() async {
+    DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+        .instance
+        .collection('newDayNumber')
+        .doc("day12")
+        .get();
+    final data = snapshot.data();
+    print(data);
+    // print(data["dayNumber"]);
     try {
-      final response = await http.get(Uri.parse(
-          'https://us-central1-staugustinechsapp.cloudfunctions.net/getDayNumber'));
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
+      if (data != null) {
         setState(() {
-          dayNumber = data['data']
-              ['dayNumber']; // Extract the day number from the API response
-          loading = false;
-        });
-      } else {
-        setState(() {
-          errorMessage =
-              'Failed to load day number. Status code: ${response.statusCode}';
-          loading = false;
+          dayNumber = data["dayNumber"];
         });
       }
     } catch (e) {
-      setState(() {
-        errorMessage = 'Error: ${e.toString()}';
-        loading = false;
-      });
+      print("error $e");
     }
+
+    // try {
+    //   final response = await http.get(Uri.parse(
+    //       'https://us-central1-staugustinechsapp.cloudfunctions.net/getDayNumber'));
+    //   if (response.statusCode == 200) {
+    //     final data = json.decode(response.body);
+    //     setState(() {
+    //       dayNumber = data['data']
+    //           ['dayNumber']; // Extract the day number from the API response
+    //       loading = false;
+    //     });
+    //   } else {
+    //     setState(() {
+    //       errorMessage =
+    //           'Failed to load day number. Status code: ${response.statusCode}';
+    //       loading = false;
+    //     });
+    //   }
+    // } catch (e) {
+    //   setState(() {
+    //     errorMessage = 'Error: ${e.toString()}';
+    //     loading = false;
+    //   });
+    // }
   }
 
   @override
