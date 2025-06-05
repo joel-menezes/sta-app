@@ -108,7 +108,7 @@ class _AnnouncementsState extends State<Announcements> {
                       // InfoBox(name: name[i], message: message[i])
                       SizedBox(height: 10),
                       Container(
-                        height: isLargeScreen ? 350 : null,
+                        height: isLargeScreen ? 380 : null,
                         child: isLargeScreen
                             ? PageView.builder(
                                 controller: _pageController,

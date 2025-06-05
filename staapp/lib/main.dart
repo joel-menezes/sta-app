@@ -1,3 +1,6 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:home_widget/home_widget.dart';
@@ -17,6 +20,59 @@ import 'data.dart';
 
 import 'dart:io';
 
+const androidWidgetName = 'DayNumberSmall';
+const iOSWidgetName = 'DayNumberSmall';
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print('📩 Background Message: ${message.messageId}');
+}
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+// import 'dart:math';
+
+// void callbackDispatcher() {
+//   Workmanager().executeTask((task, inputData) async {
+//     final randomDay = Random().nextInt(3); // 0 to 2
+
+//     await HomeWidget.saveWidgetData<String>('day_number', randomDay.toString());
+//     await HomeWidget.updateWidget(
+//       androidName: 'DayNumberSmall',
+//       iOSName: 'DayNumberSmall',
+//     );
+
+//     print('Random day $randomDay set and widget updated.');
+//     return Future.value(true);
+//   });
+// }
+
+Future<void> backgroundTask() async {
+  try {
+    final response = await http.get(Uri.parse(
+      'https://us-central1-staugustinechsapp.cloudfunctions.net/getDayNumber',
+    ));
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final dayNumber = data['data']['dayNumber'].toString();
+      
+      // Save and update widget
+      await HomeWidget.saveWidgetData<String>('day_number', dayNumber);
+      await HomeWidget.updateWidget(
+        androidName: androidWidgetName,
+        iOSName: iOSWidgetName,
+      );
+      print('Widget updated successfully in background.');
+    } else {
+      print('Failed to fetch day number: ${response.statusCode}');
+    }
+  } catch (e) {
+    print('Error in background task: $e');
+  }
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -26,7 +82,27 @@ void main() async {
 
   print(currentUser);
 
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+ const AndroidInitializationSettings androidSettings =
+      AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  const InitializationSettings initSettings =
+      InitializationSettings(android: androidSettings);
+
+  await flutterLocalNotificationsPlugin.initialize(initSettings);
+
   if (currentUser == null) FirebaseAuth.instance.signInAnonymously();
+
+
+  //  await AndroidAlarmManager.initialize();
+
+
+
+//   Workmanager().registerOneOffTask(
+//   "testRandomDay",
+//   "updateWidgetTask",
+// );
 
   runApp(const MyApp());
 }
@@ -67,6 +143,7 @@ class _MainNavigationState extends State<MainNavigation> {
 String appGroupId = 'com.staugustinechs.app';           
  String iOSWidgetName = 'DayNumberSmall';
  String androidWidgetName = 'DayNumberSmall'; 
+
 
 
   void _onItemTapped(int index) {
@@ -119,12 +196,58 @@ String  errorMessage = '';
   @override
   void initState() {
     super.initState();
+    setupFirebaseMessaging();
     
     setState((){
       fetchDayNumber();
       // updateWidgets(dayNumber.toString());
     });
     
+  }
+
+  void setupFirebaseMessaging() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    // Request notification permissions (especially for iOS)
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+
+    print('🔔 Permission granted: ${settings.authorizationStatus}');
+
+    // Get the token
+    String? token = await messaging.getToken();
+    print('📱 FCM Token: $token');
+
+    // Foreground message handler
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+
+      if (notification != null && android != null) {
+        flutterLocalNotificationsPlugin.show(
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+              'default_channel',
+              'Default',
+              importance: Importance.high,
+              priority: Priority.high,
+              icon: '@mipmap/ic_launcher',
+            ),
+          ),
+        );
+      }
+    });
+
+    // Background message tap handler
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('📨 App opened via notification: ${message.notification?.title}');
+    });
   }
 
   @override
