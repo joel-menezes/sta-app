@@ -82,26 +82,12 @@ void main() async {
 
   print(currentUser);
 
+  if (currentUser == null) FirebaseAuth.instance.signInAnonymously();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  const AndroidInitializationSettings androidSettings =
-      AndroidInitializationSettings('@mipmap/ic_launcher');
-
-  const InitializationSettings initSettings =
-      InitializationSettings(android: androidSettings);
-
-  await flutterLocalNotificationsPlugin.initialize(initSettings);
-
-  if (currentUser == null) FirebaseAuth.instance.signInAnonymously();
-
-  //  await AndroidAlarmManager.initialize();
-
-//   Workmanager().registerOneOffTask(
-//   "testRandomDay",
-//   "updateWidgetTask",
-// );
 
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -187,59 +173,13 @@ class _MainNavigationState extends State<MainNavigation> {
   @override
   void initState() {
     super.initState();
-    setupFirebaseMessaging();
+    // setupFirebaseMessaging();
 
     setState(() {
       fetchDayNumber();
       // updateWidgets(dayNumber.toString());
     });
   }
-
-  void setupFirebaseMessaging() async {
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-    // Request notification permissions (especially for iOS)
-    NotificationSettings settings = await messaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-
-    print('🔔 Permission granted: ${settings.authorizationStatus}');
-
-    // Get the token
-    String? token = await messaging.getToken();
-    print('📱 FCM Token: $token');
-
-    // Foreground message handler
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification?.android;
-
-      if (notification != null && android != null) {
-        flutterLocalNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          NotificationDetails(
-            android: AndroidNotificationDetails(
-              'default_channel',
-              'Default',
-              importance: Importance.high,
-              priority: Priority.high,
-              icon: '@mipmap/ic_launcher',
-            ),
-          ),
-        );
-      }
-    });
-
-    // Background message tap handler
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('📨 App opened via notification: ${message.notification?.title}');
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final List<Widget> _screens = [
